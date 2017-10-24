@@ -12,28 +12,36 @@ import dao.ProductDao;
 
 public class CustomerDao {
 
-	
+	//execution come from custcontroller
 	public int insertCust(Customer e)
 	{
+		
 		int x=0;
 		
-		try {	
-			 Connection con=new LoginDao().start();
+		try {
+			//connection establishment
+			 Connection con=new LoginDao().start();//return connection object
+			 //prepare statement
+			 //create sql query
 		    PreparedStatement ps=con.prepareStatement("insert into customer values(?,?,?,?,?,?)");
-			ps.setString(1,e.getIpadd());
+			//set placeholder value
+		    ps.setString(1,e.getIpadd());
             ps.setString(2,e.getName());
 			ps.setString(3,e.getAddress());
 			ps.setString(4,e.getEmail());
 			ps.setLong(5,e.getMobile());
 			ps.setString(6,e.getPassword());
-			x= ps.executeUpdate();
-			 con.close();
-			  }catch(SQLException  ex)
+			//execute statement
+			x= ps.executeUpdate();//return no. of rows affected
+			
+			 con.close();//close connection
+			  }catch(SQLException  ex)//exception handling
 			{
-				System.err.println(ex);
+				System.err.println(ex);//print exception detail
 			}
 		
-		return x;
+		return x;//return integer value
+		//execution go to custcontroller
 	}
 	
 	//execution come here from view customer controller
@@ -70,19 +78,24 @@ public class CustomerDao {
 		return list;//return the list
 		//execution go to view customer controller
 		}
-
+//execution come from edit profile controller
 	public Customer viewProfileUpdate(String email)
 	{
+		//object creation of customer bean class
 		Customer e=new Customer();
 		try {	
-			System.out.println(email);
-		    Connection con=new ProductDao().start();
+			//connection establishment
+			Connection con=new ProductDao().start();//return the connection object
+			//prepare the statement
+			//create sql query
 		    PreparedStatement ps=con.prepareStatement("select * from Customer where email=?");
-			ps.setString(1,email);
-		    ResultSet rs= ps.executeQuery();
-		while(rs.next())
+			//set the value of placeholder
+		    ps.setString(1,email);
+		    //execute statement
+		    ResultSet rs= ps.executeQuery();//return the data and set the result in result set reference
+		while(rs.next())//if data is there then condition true
 		{
-			
+			//set the value to the fields by customer object
 			e.setName(rs.getString("name"));
 			e.setAddress(rs.getString("address"));
 			e.setEmail(rs.getString("email"));
@@ -91,27 +104,34 @@ public class CustomerDao {
 			
 		}
 		System.out.println(e);
-			con.close();
-			  }catch(SQLException  ex)
+			con.close();//connection close
+			  }catch(SQLException  ex)//exception handling
 			{
-				System.err.println(ex);
+				System.err.println(ex);//print exception detail
 			}
 		
-		return e;
+		return e;//return the object of customer class 
+		//execution go to  the editprofile controller
 		}
 
+	//execution come from orderplacecontroller 
 	public Customer viewCust(String email)
 	{
+		//object creation of customer class
 		Customer e=new Customer();
 		try {	
-			System.out.println(email);
-		    Connection con=new ProductDao().start();
+			//connection establishment
+			Connection con=new ProductDao().start();//return the connection object
+			//prepare statement
+			//create sql query
 		    PreparedStatement ps=con.prepareStatement("select * from customer where email=?");
-			ps.setString(1,email);
-		    ResultSet rs= ps.executeQuery();
-		while(rs.next())
+			//set the value of placeholder
+		    ps.setString(1,email);
+		    //execute statement
+		    ResultSet rs= ps.executeQuery();//return the data and assign it to result set reference
+		while(rs.next())//if data is there then condition true
 		{
-			
+			//set the value in customer object
 			e.setName(rs.getString("name"));
 			e.setAddress(rs.getString("address"));
 			e.setEmail(rs.getString("email"));
@@ -119,40 +139,43 @@ public class CustomerDao {
 			e.setPassword(rs.getString("password"));
 			
 		}
-		System.out.println(e);
-			con.close();
-			  }catch(SQLException  ex)
+		
+			con.close();//connection close
+			  }catch(SQLException  ex)//exception handling
 			{
-				System.err.println(ex);
+				System.err.println(ex);//print detail exception
 			}
 		
-		return e;
-		}
+		return e;//return the customer object which contain data
+	//execution go to orderplacecontroller...	
+	}
 
+	//execution come from edit profile controller post method 
 	public int editProfile(String email1,String name,String address,String email,String mobile,String pwd) {
 		int x=0;
-		Customer e=new Customer();
 		try {	
-			System.out.println(email1);
-			System.out.println(name);
-			
-		    Connection con=new ProductDao().start();
-		    PreparedStatement ps=con.prepareStatement("update customer set name=?,address=?,email=?,mobile=?,password=? where email=?");
+			//connection establishment
+			Connection con=new ProductDao().start();//return the connection object
+		//prepare statement
+			//prepare sql query
+			PreparedStatement ps=con.prepareStatement("update customer set name=?,address=?,email=?,mobile=?,password=? where email=?");
+			//set placeholder value
 			ps.setString(1,name);
 			ps.setString(2,address);
 			ps.setString(3,email);
 			ps.setString(4,mobile);
 			ps.setString(5,pwd);
 			ps.setString(6,email1);
-		       
-			x=ps.executeUpdate();
-		    con.close();
-			  }catch(SQLException  ex)
+		       //execute statement
+			x=ps.executeUpdate();//return number of rows affected
+		    con.close();//connection close
+			  }catch(SQLException  ex)//exception handling
 			{
-				System.err.println(ex);
+				System.err.println(ex);//print exception in detail
 			}
 		
-		return x;
+		return x;//return integer value
+		//execution go to edit profile controller
 	}
 
 	

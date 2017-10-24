@@ -1,3 +1,28 @@
+<script type="text/javascript">
+function show(input) {
+        debugger;
+        var validExtensions = ['jpg','png','jpeg']; //array of valid extensions
+        var fileName = input.files[0].name;
+        var fileNameExt = fileName.substr(fileName.lastIndexOf('.') + 1);
+        if ($.inArray(fileNameExt, validExtensions) == -1) {
+            input.type = ''
+            input.type = 'file'
+            $('#user_img').attr('src',"");
+            alert("Only these file types are accepted : "+validExtensions.join(', '));
+        }
+        else
+        {
+        if (input.files && input.files[0]) {
+            var filerdr = new FileReader();
+            filerdr.onload = function (e) {
+                $('#user_img').attr('src', e.target.result);
+            }
+            filerdr.readAsDataURL(input.files[0]);
+        }
+        }
+    }
+
+</script>
 <title>Upload Product</title>
 <body bgcolor=#4db8ff >
 
@@ -23,10 +48,13 @@ out.println(msg);//msg which contain data
  <h1>Product Name   <input type="text" name="pname" placeholder="Chocolate cake" required="required" /></h1>
  <h1>price(INR)     <input type="text" pattern="\d+(\.\d{1,2})?" title="Enter price of product in INR" name="price" required="required" placeholder="100.00" /></h1>  
  <h1>weight(KG)     <input type="text" name="weight" pattern="\d+(\.\d{1,2})?" required="required" placeholder="100"/></h1>  
- <h1>Details        <textarea name="details" pattern="[A-Za-z]{4,}+" required="required" ></textarea></h1>
- <h1>       Image           <input type="file" name="file" accept="image/*" required="required" /></h1>
-       
-                   <input type="submit" value="upload" /><!-- button for submit the all text field and go to upload product controller -->
+ <h1>Details        <textarea name="details" pattern="^\S+.*?\S+$" required="required" ></textarea></h1>
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+<div class="form-group">
+ <h1>Upload Product Image<div class="col-md-10"><div><img id="user_img" height="130" width="130" style="border:solid" /></div><div>
+                          <input type="file" title="search image" id="file" name="file" onchange="show(this)" required="required"/></div></div></h1></div>                       
+                          
+                          <input type="submit" value="upload" /><!-- button for submit the all text field and go to upload product controller -->
  </form>
  <%
   response.addHeader("pragma", "no-cache");

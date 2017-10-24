@@ -40,12 +40,18 @@ if(m2!=null)
  
  <h1><a href="createCustomer.jsp">Create new Account</a></h1>
  </form>
+ 	<%
+  response.addHeader("pragma", "no-cache");
+  response.addHeader("cache-control", "no-store");
+  response.addHeader("expire", "0");
+
+  %>
  </pre>
  <footer class="container-fluid text-center">
   <p><h2 style="background-color:white">@ Copyright Zappy FoodShop Powered and Developed By Systango</h2></p>
 </footer>
  
  </center>
- 
+
 </body>
 </html>

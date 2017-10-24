@@ -33,16 +33,22 @@ public class ShowCartController extends HttpServlet {
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
+    //execution come from show cart button 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		//object creation of productdao class
 		ProductDao pd=new ProductDao();
-        InetAddress addr=InetAddress.getLocalHost();
+        //get the local unique ipaddress of system
+		InetAddress addr=InetAddress.getLocalHost();
     	String ipadd=addr.getHostAddress();
+    	//get the session to check if user logged in or not
 	    HttpSession ss=request.getSession();
         String user=(String) ss.getAttribute("user");
-
+//if customer logged in then condition true go inside if block
     	if(user!=null)
     	   {
-    		ArrayList<Product>list=pd.showCart(user);
+    		//by product dao class calling the method which return the result according to user and data contain by arralist
+    		ArrayList<Product>list=pd.showCart(user);//return list 
+    		//forward the execution to showcart jsp where data are shown and with data is also send
 			  RequestDispatcher rd=request.getRequestDispatcher("showCart.jsp");
 			  request.setAttribute("LIST", list);
 			  rd.forward(request, response);
@@ -50,8 +56,10 @@ public class ShowCartController extends HttpServlet {
     		}
     	   else
     	   {
-    			  ArrayList<Product>list=pd.showCart(ipadd);
-        		  RequestDispatcher rd=request.getRequestDispatcher("showCart.jsp");
+    		 //by product dao class calling the method which return the result according to ipaddress and data contain by arralist
+       			  ArrayList<Product>list=pd.showCart(ipadd);//return list
+       			//forward the execution to showcart jsp where data are shown and with data is also send
+    			  	  RequestDispatcher rd=request.getRequestDispatcher("showCart.jsp");
         		  request.setAttribute("LIST", list);
         		  rd.forward(request, response);
         	   

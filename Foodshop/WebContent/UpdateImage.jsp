@@ -4,6 +4,31 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<script type="text/javascript">
+function show(input) {
+        debugger;
+        var validExtensions = ['jpg','png','jpeg']; //array of valid extensions
+        var fileName = input.files[0].name;
+        var fileNameExt = fileName.substr(fileName.lastIndexOf('.') + 1);
+        if ($.inArray(fileNameExt, validExtensions) == -1) {
+            input.type = ''
+            input.type = 'file'
+            $('#user_img').attr('src',"");
+            alert("Only these file types are accepted : "+validExtensions.join(', '));
+        }
+        else
+        {
+        if (input.files && input.files[0]) {
+            var filerdr = new FileReader();
+            filerdr.onload = function (e) {
+                $('#user_img').attr('src', e.target.result);
+            }
+            filerdr.readAsDataURL(input.files[0]);
+        }
+        }
+    }
+
+</script>
 <title>Insert title here</title>
 </head>
 <body>
@@ -32,7 +57,10 @@
 %>
 <form action="UpdateImageController" method="post" enctype="multipart/form-data">
  <center><h1>Current Image</h1><img src="images/<%=p.getImage()%>" heigth="150" width="150" /></center>
- <center><h1>New Image         <input type="file" name="file" accept="image/*" required="required" /></h1></center>
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+ <div class="form-group">
+ <center><h1>Upload Product Image<div class="col-md-10"><div><img id="user_img" height="130" width="130" style="border:solid" /></div><div>
+                          <input type="file" title="search image" id="file" name="file" onchange="show(this)" required="required"/></div></div></h1></div></center>                       
                                <input type="hidden" value="<%=pid%>" name="pid"  />
                                <input type="submit" value="update" >  
 </form>

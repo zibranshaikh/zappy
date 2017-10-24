@@ -24,7 +24,12 @@ if(m!=null)
 <h1><font color=white>Password <input type="password" name="pwd" required="required" /></font></h1><!-- textfield which contain password -->
  <input type="submit" value="Login" /><!-- button for login go to check login controller -->
  </form>
- </pre>
+ </pre> 	<%
+  response.addHeader("pragma", "no-cache");
+  response.addHeader("cache-control", "no-store");
+  response.addHeader("expire", "0");
+
+  %>
  <footer class="container-fluid text-center">
   <p><h2 style="background-color:white">@ Copyright Zappy FoodShop Powered and Developed By Systango</h2></p>
 </footer>

@@ -59,11 +59,14 @@ if(m2!=null)
 
 
 
-
-
-
-
-
+<%
+  response.addHeader("pragma", "no-cache");
+  response.addHeader("cache-control", "no-store");
+  response.addHeader("expire", "0");
+  String user=(String)session.getAttribute("user");
+  if(user==null)
+   response.sendRedirect("custLogin.jsp");
+  %>
 
 
 <footer class="container-fluid text-center">

@@ -202,7 +202,7 @@ public class ProductDao {
 			//connection establishment
 			   Connection con=new ProductDao().start();
 			   //create the statement and sql query	  
-			   PreparedStatement ps=con.prepareStatement("insert into cart values(?,?,?,?,?,?,?,?,?)");//statement for insert the product in cart table
+			   PreparedStatement ps=con.prepareStatement("insert into cart(pid,ipaddress,pname,weight,quantity,details,image,price,tamount) values(?,?,?,?,?,?,?,?,?)");//statement for insert the product in cart table
 			   	
 			   	  //set the value of the placeholder by setter method
 			      ps.setInt(1,e.getPid());
@@ -244,6 +244,7 @@ public class ProductDao {
 		{
 			Product e=new Product();//object creation of product class
 			//set the value in the product class object
+			e.setCartid(rs.getInt("cid"));
 			e.setPid(rs.getInt("pid"));
 			e.setPname(rs.getString("pname"));
 			e.setWeight(rs.getString("weight"));
@@ -264,7 +265,7 @@ public class ProductDao {
 	//execution go to showcart controller	
 	}
 	
-	public int removeProduct(String pid,String ipadd)
+	public int removeProduct(int cid,String ipadd)
 	{    
 		//execution come from remove product controller
 		int y=0;
@@ -272,9 +273,9 @@ public class ProductDao {
 			   Connection con=new ProductDao().start();//connection establishment
 			   //prepare statement
 			   //create sql query
-			   	  PreparedStatement ps=con.prepareStatement("delete from cart where pid=? and ipaddress=?");//placeholder
+			   	  PreparedStatement ps=con.prepareStatement("delete from cart where cid=? and ipaddress=?");//placeholder
 			   	  //set the placeholder value  
-			   	  ps.setString(1,pid);
+			   	  ps.setInt(1,cid);
 			   	    ps.setString(2,ipadd);
 			   	    //execute the statement
 			   	    y=ps.executeUpdate();//return the integer value no. of rows affected
@@ -317,7 +318,7 @@ public class ProductDao {
 		//execution go to show cart jsp 
 		}
 
-	public int dispatchProduct(String pname, int status) {
+	public int dispatchProduct(int oid, int status) {
 	//execution come from admin operation controller
 		int y=0;
 		   try {
@@ -325,10 +326,10 @@ public class ProductDao {
 			   Connection con=new ProductDao().start();
 			   //prepare statement
 			   //create sql statement 
-			   	  PreparedStatement ps=con.prepareStatement("update order1 set status=? where pname=?");//placeholder
+			   	  PreparedStatement ps=con.prepareStatement("update order1 set status=? where orderid=?");//placeholder
 			   	  //set the placeholder value  
 			   	  ps.setInt(1,status);
-			   	    ps.setString(2,pname);
+			   	    ps.setInt(2,oid);
 			   	    //execute statement
 				    y=ps.executeUpdate();//return the integer value no. of rows affected
 				   	   
@@ -341,7 +342,7 @@ public class ProductDao {
 	//execution go to view todays order controller
 	}
 
-	public int cancelProduct(String pname, int status) {
+	public int cancelProduct(int oid, int status) {
 		//execution come from admin operation controller
 		int y=0;
 		   try {
@@ -349,10 +350,10 @@ public class ProductDao {
 			   Connection con=new ProductDao().start();
 			   //prepare the statement
 			   //create the sql query
-			   	  PreparedStatement ps=con.prepareStatement("update order1 set status=? where pname=?");//placeholder
+			   	  PreparedStatement ps=con.prepareStatement("update order1 set status=? where orderid=?");//placeholder
 			   	  //set the placeholder value  
 			   	  ps.setInt(1,status);
-			   	    ps.setString(2,pname);
+			   	    ps.setInt(2,oid);
 			   	    //execute statement
 				    y=ps.executeUpdate();//return the no. of rows affected 
 				   	   

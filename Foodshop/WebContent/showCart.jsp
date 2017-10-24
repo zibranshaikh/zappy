@@ -57,6 +57,7 @@ if(ar1!=null)
 		    %>
 			 <form action="RemoveProductController" method="Post">
    <td>
+    <input type="hidden" value="<%=cc.getCartid()%>" name="cid" />
 	<center><h4>Product Id :<%=cc.getPid()%></h4></center>
     <center><h4>Product Name :<a href="ShowProductDetail.jsp?pid=<%=cc.getPid()%>"><%=cc.getPname()%></a></h4></center>
     <center><b>Price</b>     : <%=cc.getPrice()%> Rs.<br/></center>
@@ -75,6 +76,7 @@ if(ar1!=null)
 
  <form action="RemoveProductController" method="Post">
    <td>
+   <input type="hidden" value="<%=cc.getCartid()%>" name="cid" />
     <center><h4>Product Id :<%=cc.getPid()%></h4></center>
     <center><h4>Product Name :<a href="ShowProductDetail.jsp?pid=<%=cc.getPid()%>"><%=cc.getPname()%></a></h4></center>
     <center><b>Price</b>     : <%=cc.getPrice()%> Rs.<br/></center>
@@ -134,5 +136,11 @@ else
     
 </center>
 </pre>
+<%
+  response.addHeader("pragma", "no-cache");
+  response.addHeader("cache-control", "no-store");
+  response.addHeader("expire", "0");
+  %>
+
 </body>
 </html>

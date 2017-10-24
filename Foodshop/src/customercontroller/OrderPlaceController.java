@@ -32,24 +32,31 @@ public class OrderPlaceController extends HttpServlet {
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
+    //execution come from show cart jsp page
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	
+	//get the session or authenticate user to go to orders
 		HttpSession ss=request.getSession();
 		String y=(String)ss.getAttribute("user");
+		//if not logged in then block execute condition true
 		if(y==null)
 		{
+			//forward to the customer login page with message
 			RequestDispatcher rd=request.getRequestDispatcher("custLogin.jsp");
 			request.setAttribute("msg2","Not Login, Login First");
 			rd.forward(request, response);
 		
 		}
-	else 
+	else //condition false if logged in
 		{
-		 
+		 //object creation of customerdao class
 		CustomerDao ed=new CustomerDao();
+		//object creation of customer class
 	    Customer c=new Customer();
+	    //assign the user to email
 	    String email=y;
-	    c=ed.viewCust(email);
+	    //by customerdao object calling the method which view the customer detail in orderjsp page
+	    c=ed.viewCust(email);//return the object of customer
+	    //forward the execution to the order place jsp page with particular customer detail which is logged in 
 	    RequestDispatcher rd=request.getRequestDispatcher("orderPlace.jsp");
 	    request.setAttribute("c", c);
 	    rd.forward(request, response);

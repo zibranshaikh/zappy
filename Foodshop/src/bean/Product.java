@@ -3,6 +3,8 @@ package bean;
 //class declaration
 public class Product {
 //instance variable 
+private int cartid;
+private int orderid;
 private int pid;
 private String pname;
 private String price;
@@ -12,56 +14,41 @@ private String image;
 private int quantity;
 private String tamount;
 private int status;
+private String email;
 //default constructor
 public Product()
 {
 	}
-//parameterized constructor
-public Product(int status) {
+//parameterized constructor for all fields
+public Product(int cartid, int orderid, int pid, String pname, String price, String weight, String details,
+		String image, int quantity, String tamount, int status, String email) {
 	super();
-	this.status = status;
-}
-//setter getter method
-public int getStatus() {
-	return status;
-}
-
-public void setStatus(int i) {
-	this.status = i;
-}
-//parameterized constructor
-public Product(int quantity, String tamount) {
-	super();
-	this.quantity = quantity;
-	this.tamount = tamount;
-}
-//setter getter method
-public int getQuantity() {
-	return quantity;
-}
-
-public void setQuantity(int quantity) {
-	this.quantity = quantity;
-}
-
-public String getTamount() {
-	return tamount;
-}
-
-public void setTamount(String tamount) {
-	this.tamount = tamount;
-}
-//parameterized constructor
-public Product(int pid, String pname, String price, String weight, String details, String image) {
-	super();
+	this.cartid = cartid;
+	this.orderid = orderid;
 	this.pid = pid;
 	this.pname = pname;
 	this.price = price;
 	this.weight = weight;
 	this.details = details;
 	this.image = image;
+	this.quantity = quantity;
+	this.tamount = tamount;
+	this.status = status;
+	this.email = email;
 }
-//setter getter method
+//setter getter method of all field
+public int getCartid() {
+	return cartid;
+}
+public void setCartid(int cartid) {
+	this.cartid = cartid;
+}
+public int getOrderid() {
+	return orderid;
+}
+public void setOrderid(int orderid) {
+	this.orderid = orderid;
+}
 public int getPid() {
 	return pid;
 }
@@ -98,6 +85,31 @@ public String getImage() {
 public void setImage(String image) {
 	this.image = image;
 }
+public int getQuantity() {
+	return quantity;
+}
+public void setQuantity(int quantity) {
+	this.quantity = quantity;
+}
+public String getTamount() {
+	return tamount;
+}
+public void setTamount(String tamount) {
+	this.tamount = tamount;
+}
+public int getStatus() {
+	return status;
+}
+public void setStatus(int status) {
+	this.status = status;
+}
+public String getEmail() {
+	return email;
+}
+public void setEmail(String email) {
+	this.email = email;
+}
 
 
 }
+

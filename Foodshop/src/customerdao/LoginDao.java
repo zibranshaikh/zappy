@@ -8,40 +8,24 @@ import java.sql.SQLException;
 
 public class LoginDao {
 
+
+	//method for return the connection 
 	public Connection start()
 	{
+		//connection reference creation
 		Connection con=null;
 		try {	
+			//load jdbc suitable driver
 			 Class.forName("com.mysql.jdbc.Driver");
-				con=DriverManager.getConnection("jdbc:mysql://localhost:3306/foodshop","root","");
-					}catch(ClassNotFoundException | SQLException e)
+			 //establish the connection and assign it into connection reference
+		con=DriverManager.getConnection("jdbc:mysql://localhost:3306/foodshop","root","");
+		}catch(ClassNotFoundException | SQLException e)//exception handling
 		{
-			System.out.println(e);
+			System.out.println(e);//print exception
 		}
-		return con;
+		return con;//return connection object which contain connection
+		
 	}
 	
-	
-	public int check(String uid,String pwd)
-	{
-		int x=0;
-		try {	
-			 Connection con=start();
-		    PreparedStatement ps=con.prepareStatement("select * from login where email=? and password=?");
-			ps.setString(1,uid);
-			ps.setString(2,pwd);
- 	        ResultSet rs= ps.executeQuery();
-			    if(rs.next())
-			    	  x=1;
-			  }catch(SQLException  e)
-			{
-				System.out.println(e);
-			}
-
-	return x;
-	}
-	public static void main(String[] args) {
-		System.out.println(new LoginDao().start());
-	}
 	
 }

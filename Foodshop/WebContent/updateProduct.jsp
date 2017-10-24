@@ -31,7 +31,7 @@ Product cc=(Product)request.getAttribute("p");
  <tr><td>Product Name     <input type="text" required="required" value="<%=cc.getPname()%>" name="pname"   /></td></tr> 
  <tr><td>price(INR)       <input type="text" pattern="\d+(\.\d{1,2})?" title="Enter price of product "name="price" required="required" value="<%=cc.getPrice()%>" name="price"   /></td> </tr>
  <tr><td>weight(KG)       <input type="text" value="<%=cc.getWeight()%>" pattern="\d{1-4}[G-Mg-m]{2}" name="weight" required="required"/></td> </tr>
- <tr><td>Details          <textarea name="details" pattern="[A-Za-z]{4,}+" /><%=cc.getDetails()%></textarea></td></tr>
+ <tr><td>Details          <textarea name="details" pattern="^\S+.*?\S+$" /><%=cc.getDetails()%></textarea></td></tr>
  </table>
             <input type="submit" value="update" />
 </form>

@@ -9,6 +9,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import bean.Product;
 import dao.ProductDao;
@@ -50,19 +51,34 @@ public class AddToCartController extends HttpServlet {
 	     
 	     double tamount= quantity1*price1;//calculating the total amount of the product
 	     System.out.println(tamount);
+	      
 	        InetAddress addr=InetAddress.getLocalHost();
 	    	String ipadd=addr.getHostAddress();//get the ip address of the system
 	 		ProductDao ed=new ProductDao();//object creation
-	 		
+	 		//get the session for add to cart
+	 		HttpSession ss=request.getSession();
+	 		 String user=(String) ss.getAttribute("user");
+	 		int p;
+	 		//if user is not logged in then add to cart by ipaddress
+	 		 if(user==null)
+	 		 {
 	 		//after that execution go to the productdao class
-	 	     int p=ed.addToCart(pid,ipadd,quantity1,tamount);//by ProductDao class object call method which return integer
+	 	      p=ed.addToCart(pid,ipadd,quantity1,tamount);//by ProductDao class object call method which return integer
+	 		 }
+	 		 else//if user is logged in then add to cart by userid
+	 		 {
+	 			//after that execution go to the productdao class
+		 	   p=ed.addToCart(pid,user,quantity1,tamount);//by ProductDao class object call method which return integer
+		 		 	 
+	 		 }
 	 	     if(p!=0)//if product is added to cart then condition true
 	 	     {
+	 	    	 //forward the execution to the view cust productcontroller
 		  RequestDispatcher rd=request.getRequestDispatcher("ViewCustProductController");//forward the execution to view cust product controller 
 	 	  request.setAttribute("msg", "Product is Added to cart");//with data
 	 	  rd.forward(request, response);//forward the page and data
 	 	     }
-	 	     else if(p==0)//condition false then execute
+	 	     else if(p==0)//if product in not added condition true then execute inside block
 	 	     {
 	 	    	 RequestDispatcher rd=request.getRequestDispatcher("ViewCustProductController");//forward the execution to view cust product controller
 	 		 	  request.setAttribute("msg", "Product is Already in cart");//with data

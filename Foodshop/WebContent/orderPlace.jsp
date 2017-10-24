@@ -54,5 +54,14 @@ Customer cc=(Customer)request.getAttribute("c");
 </footer>
 </pre>
 </center>
+<%
+  response.addHeader("pragma", "no-cache");
+  response.addHeader("cache-control", "no-store");
+  response.addHeader("expire", "0");
+  String user=(String)session.getAttribute("user");
+  if(user==null)
+   response.sendRedirect("custLogin.jsp");
+  %>
+
 </body>
 </html>

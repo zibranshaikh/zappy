@@ -47,30 +47,38 @@ public class CustController extends HttpServlet {
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
+	//execution come from create customer jsp page
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	String name=request.getParameter("name");
+	//get the fields from create customer jsp page by name
+		String name=request.getParameter("name");
 	String address=request.getParameter("address");
 	String email=request.getParameter("email");
 	String mobile=request.getParameter("mobile");
 	String password=request.getParameter("password");
+	//get the local host unique ipaddress
     InetAddress addr=InetAddress.getLocalHost();
-	String ipadd=addr.getHostAddress();
+	String ipadd=addr.getHostAddress();//set the ipaddress to variable
+	//object creation of customer bean class to set the value of each field
 	Customer e=new Customer(ipadd,name,address,email,Long.parseLong(mobile),password);
 
-   	
+   	//object creation of customer dao class
 		CustomerDao ed=new CustomerDao();
-	int y=ed.insertCust(e);
-	System.out.println(y);
-		if(y==1)
-		{
+		//by this object calling the method which insert the customer info to the database
+	int y=ed.insertCust(e);//return the integer value
+	System.out.println("value of y in custcontroller "+y);
+		if(y==1)//if condition true inside block
+		{   
+			//call the method which sends the mail to the customer
 			 sendMail(email,password);
 		        
+			 //forward execution to custlogin.jsp page with message of registration
 	RequestDispatcher rd=request.getRequestDispatcher("custLogin.jsp");
 		request.setAttribute("msg","Registration Successfull , Login now");
 		rd.forward(request, response);
 	
 		}
 	}
+	//execution come from if block
 	 public void sendMail(String email, String password1)
 	   {
 			  // Recipient's email ID needs to be mentioned.

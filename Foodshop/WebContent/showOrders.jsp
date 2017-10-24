@@ -48,7 +48,8 @@ if(ar1!=null)
 			out.println("<tr>");
 		    %>
   <td>
-	<center><h4>Product Id :<%=cc.getPid()%></h4></center>
+	<center><h4>Order Id :<%=cc.getOrderid()%></h4></center>
+    <center><h4>Product Id :<%=cc.getPid()%></h4></center>
     <center><h4>Product Name :<a href="ShowProductDetail.jsp?pid=<%=cc.getPid()%>"><%=cc.getPname()%></a></h4></center>
     <center><b>Price</b>     : <%=cc.getPrice()%> Rs.<br/></center>
     <center><img src="images/<%=cc.getImage()%>" heigth="150" width="150" /></center>
@@ -77,6 +78,7 @@ if(ar1!=null)
       %>
 
     <center><b>Status</b>  :<%=status%></center>
+    <center><b>To</b>      :<%=cc.getEmail()%></center>
    </td> 				
 		</form>
 	<%
@@ -84,6 +86,7 @@ if(ar1!=null)
 				%>
 
  <td>
+    <center><h4>Order Id :<%=cc.getOrderid()%></h4></center>
     <center><h4>Product Id :<%=cc.getPid()%></h4></center>
     <center><h4>Product Name :<a href="ShowProductDetail.jsp?pid=<%=cc.getPid()%>"><%=cc.getPname()%></a></h4></center>
     <center><b>Price</b>     : <%=cc.getPrice()%> Rs.<br/></center>
@@ -114,6 +117,8 @@ if(ar1!=null)
       %>
       
     <center><b>Status</b>  :<%=status%></center> 
+    <center><b>To</b>      :<%=cc.getEmail()%></center> 
+    
     </td>
 </form>
 				<%
@@ -135,6 +140,15 @@ if(ar1!=null)
 </footer>
 
 </center>
+<%
+  response.addHeader("pragma", "no-cache");
+  response.addHeader("cache-control", "no-store");
+  response.addHeader("expire", "0");
+  String user=(String)session.getAttribute("user");
+  if(user==null)
+   response.sendRedirect("custLogin.jsp");
+  %>
+
 </pre>
 </body>
 </html>

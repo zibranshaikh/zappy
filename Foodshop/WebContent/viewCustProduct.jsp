@@ -148,11 +148,18 @@ if(ar!=null)
 	<%
 	}
 %>
+
+
 <footer class="container-fluid text-center">
   <p><h2 style="background-color:white">@ Copyright Zappy FoodShop Powered and Developed By Systango</h2></p>
 </footer>
 	</center>
 </pre>
-	
+	<%
+  response.addHeader("pragma", "no-cache");
+  response.addHeader("cache-control", "no-store");
+  response.addHeader("expire", "0");
+
+  %>
 </body>
 </html>

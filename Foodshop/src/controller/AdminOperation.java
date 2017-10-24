@@ -46,13 +46,15 @@ public class AdminOperation extends HttpServlet {
 	    { 
 	    	int y=0;
 	    	//get the field by name from show todays order jsp
-	    	String pid=request.getParameter("pid");
+	    	String oid=request.getParameter("oid");
+	    	oid=oid.trim();
+	    	int oid1=Integer.parseInt(oid);
 	    	String pname=request.getParameter("pname");
 	    	int status=1;
 	    	
 	          ProductDao p=new ProductDao();//object creation of productdao class 
 	          //by this object calling the method for dispatch the order
-	         y=p.dispatchProduct(pname,status);//return the integer value after updation
+	         y=p.dispatchProduct(oid1,status);//return the integer value after updation
 	       if(y!=0)//if order dipatched then condition true
 	       {
 	    	   //forward the execution from here to view today order controller with message of updation
@@ -64,19 +66,21 @@ public class AdminOperation extends HttpServlet {
 	    else if(op.equals("Cancel"))//if button contain cancel then condition true
 		   {
 	    	//get the field by name from show todays order jsp page
-	    	String pid=request.getParameter("pid");
-	     	String pname=request.getParameter("pname");
+	    	String oid=request.getParameter("oid");
+	    	oid=oid.trim();
+	    	int oid1=Integer.parseInt(oid);
+	    	String pname=request.getParameter("pname");
 	    	int status=2;
 	        int y=0;
 	        //object creation of product dao class
 	    	ProductDao p=new ProductDao();
 	    	//by this object calling the method for cancel the order
-	         y=p.cancelProduct(pname,status);//return the integer value 
+	         y=p.cancelProduct(oid1,status);//return the integer value 
 	       if(y!=0)//if product cancelled condition true
 	       {
 	    	   //forward the execution from here to view today order controller with message of order cancelled
 			  	RequestDispatcher rd=request.getRequestDispatcher("ViewTodayOrderController");
-			  	 request.setAttribute("msg", pname+" Order is cancelled");
+			  	 request.setAttribute("msg", pname+" Order is cancelled ");
 			  	 rd.forward(request,response); }	
 	    }
 	    

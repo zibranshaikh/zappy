@@ -1,6 +1,7 @@
 package customercontroller;
 
 import java.io.IOException;
+import java.net.InetAddress;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -54,9 +55,12 @@ public class CustLoginController extends HttpServlet {
 			    HttpSession ss=request.getSession();
 		        ss.setAttribute("user",u);
 //object creation of productdao class
+		        InetAddress addr=InetAddress.getLocalHost();
+		    	String ipadd=addr.getHostAddress();//get the ip address of the system
 		 		ProductDao ed=new ProductDao();
+		 		int p2=ed.checkEProduct(ipadd,u);
 	//by this object calling the method which set the ipaddress as email
-		 		int p1=ed.updateCart(u);//return the integer value
+		 		int p1=ed.updateCart(u,ipadd);//return the integer value
 		        response.sendRedirect("Customer.jsp");//send to the customer jsp
 		   }
 		   else

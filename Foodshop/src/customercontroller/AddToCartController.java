@@ -42,7 +42,7 @@ public class AddToCartController extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         //execution come here from view customer product...
-		 String pid=request.getParameter("pid");//get the field data by field name..
+		 int pid=Integer.parseInt(request.getParameter("pid"));//get the field data by field name..
 	     String op=request.getParameter("op");//get the field data by field name..
 	     String quantity=request.getParameter("quantity");//get the field data by field name..
 	     String price=request.getParameter("price");//get the field data by field name..

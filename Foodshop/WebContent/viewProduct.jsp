@@ -2,9 +2,35 @@
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
+ <link rel="shortcut icon" type="image/x-icon" href="images/zappy-logo.ico" />
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Products</title>
+<script type="text/javascript">
+function show(input) {
+        debugger;
+        var validExtensions = ['jpg','png','jpeg']; //array of valid extensions
+        var fileName = input.files[0].name;
+        var fileNameExt = fileName.substr(fileName.lastIndexOf('.') + 1);
+        if ($.inArray(fileNameExt, validExtensions) == -1) {
+            input.type = ''
+            input.type = 'file'
+            $('#user_img').attr('src',"");
+            alert("Only these file types are accepted : "+validExtensions.join(', '));
+        }
+        else
+        {
+        if (input.files && input.files[0]) {
+            var filerdr = new FileReader();
+            filerdr.onload = function (e) {
+                $('#user_img').attr('src', e.target.result);
+            }
+            filerdr.readAsDataURL(input.files[0]);
+        }
+        }
+    }
+
+</script>
 </head>
 <body bgcolor="#4db8ff" >
 <p1 align="right">
@@ -51,40 +77,54 @@ if(ar1!=null)
 			out.println("<tr>");
 		    %>
    <!-- first row of the product which contain 4 product with all the information -->
+<td>
 <form action="UpdateDelProductController" method="get">
-    <td>
+    
 	   <input type="hidden" value="<%=cc.getPid()%>" name="pid" />
      <center><h4>Product Id :<%=cc.getPid()%></h4></center>
     <center><h4>Product Name :<%=cc.getPname()%></a></h4></center>
     <center><b>Price</b>     : <%=cc.getPrice()%> Rs.<br/></center>
     <center><img src="images/<%=cc.getImage()%>" heigth="150" width="150" /></center>
-    <center><a href="UpdateImage.jsp?pid=<%=cc.getPid()%>">Update Image</a></center>
-    <center><b>Weight</b>    : <%=cc.getWeight()%> gms.<br/></center>
+   </form><center><b>Weight</b>    : <%=cc.getWeight()%> gms.<br/></center>
     <center><b>Details</b>   : <%=cc.getDetails()%><br/></center>
 <!-- two button are there update and delete , on click both button execution will go to updatedelproductcontroller -->
     <center><h4><input type="submit" name="op" value="Update" /><input type="submit" name="op" value="Delete" onclick="return confirmTest();" /></form></center>   
-
-</td> 				
+ 				
 		</form>
+		 <form action="UpdateImageController" method="post" enctype="multipart/form-data">
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+ <div class="form-group">
+                           <input type="file" title="search image" id="file" name="file" onchange="show(this)" required="required"/></div></div></h1></div></center>                       
+                          <input type="hidden" value="<%=cc.getPid()%>" name="pid"  />
+                          <center><input type="submit" value="updateimage" /></center>  
+</td>		
 	<%
 			}else{
 				%>
 <!-- second row of the product which contain 4 product with all the information -->
+<td>
+
 <form action="UpdateDelProductController" method="get">
-    <td>
+    
   <input type="hidden" value="<%=cc.getPid()%>" name="pid" />
       <center><h4>Product Id :<%=cc.getPid()%></h4></center>
     <center><h4>Product Name :<%=cc.getPname()%></a></h4></center>
     <center><b>Price</b>     : <%=cc.getPrice()%> Rs.<br/></center>
     <center><img src="images/<%=cc.getImage()%>" heigth="150" width="150" /></center>
-    <center><a href="UpdateImage.jsp?pid=<%=cc.getPid()%>">Update Image</a></center>
     <center><b>Weight</b>    : <%=cc.getWeight()%> gms.<br/></center>
     <center><b>Details</b>   : <%=cc.getDetails()%><br/></center>
 <!-- two button are there update and delete , on click both button execution will go to updatedelproductcontroller -->
     <center><h4><input type="submit" name="op" value="Update" /><input type="submit" name="op" value="Delete" onclick="return confirmTest();" /></form></center>   
-	  </td>
+	  
 </form>
-				<%
+<form action="UpdateImageController" method="post" enctype="multipart/form-data">
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+ <div class="form-group">
+    <input type="file" title="search image" id="file" name="file" onchange="show(this)" required="required"/></div></div></h1></div></center>                       
+                          <input type="hidden" value="<%=cc.getPid()%>" name="pid"  />
+                          <center><input type="submit" value="updateimage" /></center>  
+</form>
+	</td>			<%
 			if(a1%4==3)
 				out.println("</tr>");
 			    	

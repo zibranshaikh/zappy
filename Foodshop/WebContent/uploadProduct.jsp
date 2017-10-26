@@ -23,6 +23,7 @@ function show(input) {
     }
 
 </script>
+ <link rel="shortcut icon" type="image/x-icon" href="images/zappy-logo.ico" />
 <title>Upload Product</title>
 <body bgcolor=#4db8ff >
 

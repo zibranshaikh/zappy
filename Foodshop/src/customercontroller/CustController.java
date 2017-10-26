@@ -68,8 +68,10 @@ public class CustController extends HttpServlet {
 	System.out.println("value of y in custcontroller "+y);
 		if(y==1)//if condition true inside block
 		{   
+			String subject="Zeppy Account Creation & Password";
+			String message="Welcome at Zeppy FoodShop your login id is "+email+" and your password "+password;
 			//call the method which sends the mail to the customer
-			 sendMail(email,password);
+			 sendMail(email,message,subject);
 		        
 			 //forward execution to custlogin.jsp page with message of registration
 	RequestDispatcher rd=request.getRequestDispatcher("custLogin.jsp");
@@ -79,15 +81,15 @@ public class CustController extends HttpServlet {
 		}
 	}
 	//execution come from if block
-	 public void sendMail(String email, String password1)
+	 public void sendMail(String email, String message1,String subject)
 	   {
 			  // Recipient's email ID needs to be mentioned.
 		      String to =email;//request.getParameter("id");//change accordingly
-		      String sub="Zeppy Account Creation & Password";
+		      String sub=subject;
 //		      long p=System.currentTimeMillis();//439807598430759083
 //		      String pwd=(p+"").substring(7);
-		      String pwd=password1;
-		      String msg="Welcome at Zeppy FoodShop your login id is "+email+" and your password "+pwd;
+		      
+		      String msg=message1;
 		      // Sender's email ID needs to be mentioned
 		      String from = "zshaikh1990s@gmail.com";
 		      final String username = "zshaikh1990s@gmail.com";//change accordingly

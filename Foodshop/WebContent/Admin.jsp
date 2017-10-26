@@ -1,3 +1,4 @@
+ <link rel="shortcut icon" type="image/x-icon" href="images/zappy-logo.ico" />
 <title>Admin Home</title>
 <body bgcolor=#4db8ff>
 <p1 align="right">

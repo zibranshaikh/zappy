@@ -151,21 +151,20 @@ public class CustomerDao {
 	}
 
 	//execution come from edit profile controller post method 
-	public int editProfile(String email1,String name,String address,String email,String mobile,String pwd) {
+	public int editProfile(String email1,String name,String address,String email,String mobile) {
 		int x=0;
 		try {	
 			//connection establishment
 			Connection con=new ProductDao().start();//return the connection object
 		//prepare statement
 			//prepare sql query
-			PreparedStatement ps=con.prepareStatement("update customer set name=?,address=?,email=?,mobile=?,password=? where email=?");
+			PreparedStatement ps=con.prepareStatement("update customer set name=?,address=?,email=?,mobile=? where email=?");
 			//set placeholder value
 			ps.setString(1,name);
 			ps.setString(2,address);
 			ps.setString(3,email);
 			ps.setString(4,mobile);
-			ps.setString(5,pwd);
-			ps.setString(6,email1);
+			ps.setString(5,email1);
 		       //execute statement
 			x=ps.executeUpdate();//return number of rows affected
 		    con.close();//connection close
@@ -177,6 +176,46 @@ public class CustomerDao {
 		return x;//return integer value
 		//execution go to edit profile controller
 	}
+
+	public int changeCpwd(String cpass, String npass2, String user) {
+
+		int x=0;
+		String pass="";
+		try {
+			//connection establishment
+			Connection con=new ProductDao().start();//return the connection reference
+			//prepare the statement 
+			//create the sql query
+			PreparedStatement ps1=con.prepareStatement("select password from customer where email=?");//placeholder
+	   	    ps1.setString(1,user);//set the placeholder value
+	   	    //create resultset reference
+	   	    //execute statement
+	   	    ResultSet rs= ps1.executeQuery();//return the data to result set reference
+			while(rs.next())//condition check
+			{
+				//get the data by result set reference
+			  pass=rs.getString("password");	
+			}
+			if(pass.equalsIgnoreCase(cpass))//condition true if password match to current password 
+			{
+				//prepare statement
+				//create sql query
+			PreparedStatement ps=con.prepareStatement("update customer set password=? where email=?");//placeholder
+			//set the value of placeholder   	    
+			ps.setString(1,npass2);
+			ps.setString(2,user);
+			  //execute statement
+			   	    x=ps.executeUpdate();//return the no. of rows affected
+			}  	    
+			     }catch(Exception e)//exception handling
+			     {
+			   	  System.out.println(e);//print exception in detail
+			     }
+
+		
+		return x; //return the integer value
+		//execution go to adeditpcontroller
+}
 
 	
 }

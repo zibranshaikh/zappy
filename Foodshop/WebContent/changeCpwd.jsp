@@ -1,5 +1,5 @@
  <link rel="shortcut icon" type="image/x-icon" href="images/zappy-logo.ico" />
-<title>Admin Change Password</title>
+<title>Customer Change Password</title>
 <script type="text/javascript">
   function validate()
   {
@@ -17,11 +17,15 @@
 
 <body bgcolor=#4db8ff >
 <p1 align="left">
-<form action="Admin.jsp" method="">
+<form action="Customer.jsp" method="">
 
 <input type="submit" value="Home" /></form></p1><!-- button for go to admin home -->
+<p1 align="center">
+<form action="ViewCustProductController" method="get">
+<input type="submit" value="SHOPNOW" /></form>
+</p1>
 <p1 align="right">
-<form action="adminlogout.jsp" method="">
+<form action="logout.jsp" method="">
 
 <input type="submit" value="LogOut" /></form></p1><!-- button for admin logout -->
 
@@ -35,21 +39,21 @@
 if(m2!=null) 
 out.println(m2); %>
 </font></h1>
-<form action="AdEditPController" method="post">
+<form action="EditProfileController" method="post">
 
 Current Password  <input type="text" name="cpass" required="required" placeholder="123@zibran" onblur="pwdCheck()"/>
 New Password      <input type="text" name="npass1" id="npass1" required="required"  placeholder="123@zibran" />
 Confirm Password  <input type="text" name="npass2" id="npass2" required="required" placeholder="123@zibran" onblur="return validate()"/>
                           
-             <input type="submit" value="Change Password" /><!-- button to submit the field and go to adeditcontroller -->
+             <input type="submit" value="Change Password" name="edit" /><!-- button to submit the field and go to adeditcontroller -->
 </form>
 <%
   response.addHeader("pragma", "no-cache");
   response.addHeader("cache-control", "no-store");
   response.addHeader("expire", "0");
-  String admin=(String)session.getAttribute("admin");
-  if(admin==null)
-   response.sendRedirect("AdminLogin.jsp");
+  String user=(String)session.getAttribute("user");
+  if(user==null)
+   response.sendRedirect("custLogin.jsp");
   %>
 
 </pre>

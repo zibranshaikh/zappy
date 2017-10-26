@@ -1,4 +1,6 @@
 <!--execution come from product page to there  -->
+
+<link rel="shortcut icon" type="image/x-icon" href="images/zappy-logo.ico" />
 <title>Admin Login</title>
 
 <body  bgcolor=#4db8ff>

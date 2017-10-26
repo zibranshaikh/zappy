@@ -2,6 +2,7 @@
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
+ <link rel="shortcut icon" type="image/x-icon" href="images/zappy-logo.ico" />
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Edit Profile</title>
@@ -12,6 +13,10 @@
 <input type="submit" value="Home" name="op" />
 </form>
 </p>
+<p1 align="center">
+<form action="ViewCustProductController" method="get">
+<input type="submit" value="SHOPNOW" /></form>
+</p1>
 <p1 align="right">
 <form action="logout.jsp" method="">
 
@@ -22,6 +27,7 @@
 <h1 style="background-color:white">Edit Profile</h1>
 <pre>
 <%@page import="java.util.ArrayList,customerbean.Customer" %>
+<h1><a href="changeCpwd.jsp">CHANGE PASSWORD</a></h1>
 <form action="EditProfileController" method="post" >
 <%
 Customer cc=(Customer)request.getAttribute("c");
@@ -32,10 +38,10 @@ Customer cc=(Customer)request.getAttribute("c");
  <tr><td><h1>Address   <input type="text" value="<%=cc.getAddress()%>" name="address" required="required" /></h1></td> </tr>
  <tr><td><h1>EMAIL     <input type="email" value="<%=cc.getEmail()%>" name="email" required="required" /></h1></td> </tr>
  <tr><td><h1>Mobile    <input type="text" value="<%=cc.getMobile()%>" pattern="[0-9]{10}" name="mobile" required="required" /></h1></td></tr>
- <tr><td><h1>Password  <input type="password" value="<%=cc.getPassword()%>" name="pwd" required="required" /></h1></td>
          </table>
-            <input type="submit" value="EDIT" />
+            <input type="submit" value="EDIT" name="edit" />
 </form>
+
 </pre>
  <footer class="container-fluid text-center">
   <p><h2 style="background-color:white">@ Copyright Zappy FoodShop Powered and Developed By Systango</h2></p>

@@ -9,6 +9,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import bean.Product;
+import customercontroller.CustController;
+import customerdao.OrderDao;
 import dao.ProductDao;
 
 /**
@@ -31,6 +34,7 @@ public class AdminOperation extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		doPost(request,response);
 		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
@@ -52,11 +56,20 @@ public class AdminOperation extends HttpServlet {
 	    	String pname=request.getParameter("pname");
 	    	int status=1;
 	    	
-	          ProductDao p=new ProductDao();//object creation of productdao class 
+	          ProductDao pd =new ProductDao();//object creation of productdao class 
 	          //by this object calling the method for dispatch the order
-	         y=p.dispatchProduct(oid1,status);//return the integer value after updation
+	         y=pd.dispatchProduct(oid1,status);//return the integer value after updation
 	       if(y!=0)//if order dipatched then condition true
-	       {
+	       {  
+	    	   Product p= new Product(); 
+	    	   p=pd.getCustO(oid1);
+	    	   String email=p.getEmail();
+	    		String subject="Zappy Foods Order Dispatched";
+	 	        String message="Your Order has been Dispatched with orderid"+oid1;
+	 	    	CustController cc=new CustController();
+	 	    	          cc.sendMail(email,message,subject);
+			
+	       	
 	    	   //forward the execution from here to view today order controller with message of updation
 		  	 RequestDispatcher rd=request.getRequestDispatcher("ViewTodayOrderController");
 		  	 request.setAttribute("msg", pname+" Order is dispatched");
@@ -73,11 +86,19 @@ public class AdminOperation extends HttpServlet {
 	    	int status=2;
 	        int y=0;
 	        //object creation of product dao class
-	    	ProductDao p=new ProductDao();
+	    	ProductDao pd=new ProductDao();
 	    	//by this object calling the method for cancel the order
-	         y=p.cancelProduct(oid1,status);//return the integer value 
+	         y=pd.cancelProduct(oid1,status);//return the integer value 
 	       if(y!=0)//if product cancelled condition true
 	       {
+	    	   Product p= new Product(); 
+	    	   p=pd.getCustO(oid1);
+	    	   String email=p.getEmail();
+	    		String subject="Zappy Foods Order Cancelled";
+	 	        String message="Your Order has been Cancelled by seller with orderid"+oid1;
+	 	    	CustController cc=new CustController();
+	 	    	          cc.sendMail(email,message,subject);
+			
 	    	   //forward the execution from here to view today order controller with message of order cancelled
 			  	RequestDispatcher rd=request.getRequestDispatcher("ViewTodayOrderController");
 			  	 request.setAttribute("msg", pname+" Order is cancelled ");

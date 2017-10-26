@@ -1,3 +1,4 @@
+ <link rel="shortcut icon" type="image/x-icon" href="images/zappy-logo.ico" />
 <title>Customer Details</title>
 <body bgcolor=#4db8ff >
 

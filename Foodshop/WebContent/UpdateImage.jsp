@@ -2,6 +2,7 @@
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
+ <link rel="shortcut icon" type="image/x-icon" href="images/zappy-logo.ico" />
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <script type="text/javascript">
@@ -31,7 +32,7 @@ function show(input) {
 </script>
 <title>Insert title here</title>
 </head>
-<body>
+<body bgcolor=#4db8ff >
 <form action="Admin.jsp" method="">
 <input type="submit" value="Home" /></form>
 </p1>
@@ -41,6 +42,7 @@ function show(input) {
 <input type="submit" value="LogOut" /></form></p1>
 
 <center>
+<img src="images/zappy-logo.png"></img>
 <h1 style="background-color:white">Update Product Image</h1>
 <% String m=(String)request.getAttribute("msg");
    if(m!=null)
@@ -59,10 +61,11 @@ function show(input) {
  <center><h1>Current Image</h1><img src="images/<%=p.getImage()%>" heigth="150" width="150" /></center>
  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
  <div class="form-group">
- <center><h1>Upload Product Image<div class="col-md-10"><div><img id="user_img" height="130" width="130" style="border:solid" /></div><div>
-                          <input type="file" title="search image" id="file" name="file" onchange="show(this)" required="required"/></div></div></h1></div></center>                       
-                               <input type="hidden" value="<%=pid%>" name="pid"  />
-                               <input type="submit" value="update" >  
+ <center><h1>Upload New Image<div class="col-md-10"><div><img id="user_img" height="130" width="130" style="border:solid" /></div><div>
+       
+                                   <input type="file" title="search image" id="file" name="file" onchange="show(this)" required="required"/></div></div></h1></div></center>                       
+                          <input type="hidden" value="<%=pid%>" name="pid"  />
+                          <center><input type="submit" value="update" /></center>  
 </form>
 <%
   response.addHeader("pragma", "no-cache");
@@ -72,7 +75,6 @@ function show(input) {
   if(admin==null)
    response.sendRedirect("AdminLogin.jsp");
   %>
-
 </center>
 </body>
 </html>

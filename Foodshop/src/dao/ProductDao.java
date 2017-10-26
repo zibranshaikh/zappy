@@ -165,7 +165,7 @@ public class ProductDao {
 		   return y;//return the integer value
 		   //execution go to the update delete product controller 
 	}
-	public int addToCart(String pid,String ipadd,int quantity,double tamount)
+	public int addToCart(int pid,String ipadd,int quantity,double tamount)
 	{
 		
 		//execution come there from the Add to cart controller 
@@ -173,12 +173,11 @@ public class ProductDao {
 		int y=0;//initialize a variable
 		Product e=new Product();//object creation of product class which is bean class
 		try {	
-			
-			System.out.println("pid in add to cart dao "+pid);
 			//connection establishment to database
 		    Connection con=new ProductDao().start();//returns connection reference
-		    PreparedStatement ps=con.prepareStatement("select * from product where pid=?");//statement creation
-			ps.setString(1,pid);//set the parameter to the sql query
+		    System.out.println("pid in add to cart dao "+pid);
+			PreparedStatement ps=con.prepareStatement("select * from product where pid=?");//statement creation
+			ps.setInt(1,pid);//set the parameter to the sql query
 		    ResultSet rs= ps.executeQuery();//execute the statement
 		while(rs.next())
 		{
@@ -198,10 +197,42 @@ public class ProductDao {
 				System.err.println(ex);//exception description print
 			}
 		//now it will fetch the existing product detail
+		int pid1=0;
+		String ipadd1="";
 		try {   
+			
 			//connection establishment
 			   Connection con=new ProductDao().start();
 			   //create the statement and sql query	  
+		
+			   PreparedStatement ps1=con.prepareStatement("select pid,ipaddress from cart where pid=?");//statement creation
+				ps1.setInt(1,pid);//set the parameter to the sql query
+			
+			    ResultSet rs= ps1.executeQuery();//execute the statement
+				while(rs.next())
+				{
+					pid1=rs.getInt("pid");
+					ipadd1=rs.getString("ipaddress");
+					
+				}
+			
+		 		if(pid1==pid && ipadd1.equals(ipadd))
+				{
+				      //prepare the statement
+		              //create the sql query
+			       	   PreparedStatement ps=con.prepareStatement("update cart set quantity=?,tamount=? where pid=? and ipaddress=?");//placeholder
+					   //set the value of placeholder	
+			       	   ps.setInt(1,quantity);
+			       	   ps.setDouble(2,tamount);
+			       	   ps.setInt(3,pid1);
+			       	   ps.setString(4,ipadd);
+
+			       	   //execute statement
+					   y=ps.executeUpdate();//return the no. of rows affected
+				
+				}
+				else
+				{
 			   PreparedStatement ps=con.prepareStatement("insert into cart(pid,ipaddress,pname,weight,quantity,details,image,price,tamount) values(?,?,?,?,?,?,?,?,?)");//statement for insert the product in cart table
 			   	
 			   	  //set the value of the placeholder by setter method
@@ -217,7 +248,7 @@ public class ProductDao {
 			    	   		    
 			   	    y=ps.executeUpdate();//execute the statement
 			   	    
-		
+				}
 		       }catch(Exception ex)//exception handling
 			     {
 			   	  System.out.println(ex);//exception detail print
@@ -430,7 +461,7 @@ public class ProductDao {
 	
 	}
 
-	public int updateCart(String u) {
+	public int updateCart(String u,String ipadd) {
 		//execution come from customer login controller
 		//after successful login the cart now maintain by userid of customer
 		int y=0;
@@ -440,9 +471,11 @@ public class ProductDao {
               Connection con=new ProductDao().start();
               //prepare the statement
               //create the sql query
-	       	   PreparedStatement ps=con.prepareStatement("update cart set ipaddress=?");//placeholder
+	       	   PreparedStatement ps=con.prepareStatement("update cart set ipaddress=? where ipaddress=?");//placeholder
 			   //set the value of placeholder	
 	       	   ps.setString(1,u);
+	           ps.setString(2,ipadd);
+	       	   
 	       	   //execute statement
 			   	        y=ps.executeUpdate();//return the no. of rows affected
 			   	    
@@ -453,6 +486,92 @@ public class ProductDao {
     System.out.println("y in update cart dao "+y);
 		   return y;//integer value return
 		   //execution go to the customer login controller
+		
+	}
+
+	public int checkEProduct(String ipadd,String email) {
+
+		//execution come from customer login controller
+				//after successful login the cart now maintain by userid of customer
+				int y=0;
+				   try {
+		              //connection establishment
+		              Connection con=new ProductDao().start();
+		              //prepare the statement
+		              //create the sql query
+			       	   PreparedStatement ps=con.prepareStatement("select pid from cart where ipaddress=?");//placeholder
+					   //set the value of placeholder	
+			       	   ps.setString(1,email);
+			       	   //execute statement
+			       	 PreparedStatement ps1=con.prepareStatement("select pid from cart where ipaddress=?");//placeholder
+					   //set the value of placeholder	
+			       	   ps1.setString(1,ipadd);
+			       	   //execute statement
+			       	   ResultSet rs =ps.executeQuery();
+			       	   
+			           int epid=0;
+			           int ipid=0;
+			       	   while(rs.next())
+					   	    {
+					   	    	epid=rs.getInt("pid");
+					   	    	
+					   	    	ResultSet rs1 =ps1.executeQuery();
+					   	    	while(rs1.next())
+						   	    {
+					   	    	
+						   	    	ipid=rs1.getInt("pid");
+		         	if(epid==ipid)
+						       	{
+						       	//prepare the statement
+						        //create the sql query
+			   	   PreparedStatement ps3=con.prepareStatement("delete from cart where ipaddress=? and pid=?");//placeholder
+					   //set the value of placeholder	
+				    	   ps3.setString(1,email);
+				    	   ps3.setInt(2,epid);
+							       	   //execute statement
+					  y=ps3.executeUpdate();//return the no. of rows affected
+									        		
+						       	}
+						   	    }
+					   	    }
+			       	     }catch(Exception e)//exception handling
+					     {
+					   	  System.out.println(e);//excpetion detail print
+					     }
+		    System.out.println("y in delete product cart dao "+y);
+				   return y;//integer value return
+				   //execution go to the customer login controller
+					}
+
+	public Product getCustO(int oid) {
+
+		//execution come from show product detail jsp
+		Product e=new Product();//object creation of product class
+		try {	
+			//connection establishment
+		    Connection con=new ProductDao().start();
+		    //prepare the statement
+		    //create the sql query
+		    PreparedStatement ps=con.prepareStatement("select * from order1 where oid=?");
+			//set placeholder value
+		    ps.setInt(1,oid);
+		    //execute statement
+		    ResultSet rs= ps.executeQuery();//return the value with result set reference
+		while(rs.next())//condition check
+		{
+			//set the value in product class object
+			e.setEmail(rs.getString("email"));
+			
+		}
+		System.out.println(e);
+			con.close();//connection close
+			  }catch(SQLException  ex)//exception handling
+			{
+				System.err.println(ex);//print exception detail
+			}
+		
+		return e;//return the product class object
+		//execution go  to show product detail jsp
 		
 	}
 

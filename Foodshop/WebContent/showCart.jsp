@@ -2,9 +2,60 @@
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
+ <link rel="shortcut icon" type="image/x-icon" href="images/zappy-logo.ico" />
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Cart</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+<script>
+function getData(i)
+{
+	
+	//alert("asdfasd"+i);
+	var q=document.getElementById('quant'+i).value;  
+	var cid=document.getElementById('cid'+i).value;
+	var pid=document.getElementById('pid'+i).value; 
+	var up=document.getElementById('price'+i).value; 
+	 var data= "cid="+cid+"&pid="+pid+"&quantity="+q+"&price="+up;
+	//	alert(data);		
+		var url="updateCartQ.jsp?"+data;
+		var request;
+		if(window.XMLHttpRequest)
+		{  
+		request=new XMLHttpRequest();  
+		}  
+		else if(window.ActiveXObject)
+		{  
+		request=new ActiveXObject("Microsoft.XMLHTTP");  
+		}  
+		try  
+		{  
+		request.onreadystatechange=getInfo;  
+		request.open("GET",url,true);  
+		request.send(); 
+		}  
+		catch(e)  
+		{  
+		alert("Unable to connect to server");  
+		}  
+		function getInfo(){  
+			if(request.readyState==4){
+			var val=request.responseText;  
+	//		alert("Now Total amount is"+val);
+			document.getElementById('res').value=val;
+			/* var strarray = val.split('.');
+			document.getElementById('pdate').value=(strarray[0]).trim();  
+			document.getElementById('ptype').value=(strarray[1]).trim();
+			document.getElementById('CostCenter').value=(strarray[2]).trim();  
+			document.getElementById('currency').value=(strarray[3]).trim();   */
+			}		
+		
+		}
+		
+	}
+	
+
+	</script>
 </head>
 <body bgcolor="#4db8ff" >
 
@@ -18,7 +69,14 @@
 <form action="logout.jsp" method="">
 <input type="submit" value="LogOut" /></form></p1>
 
-<%} %>
+<%}
+    else
+    {
+    %>
+    <p2 align="left" >
+<form action="custLogin.jsp" method="get">
+<input type="submit" value="CustomerLogin" /></form></p2>
+    <%} %>
 <p1 align="center">
 <form action="ViewCustProductController" method="get">
 
@@ -57,16 +115,17 @@ if(ar1!=null)
 		    %>
 			 <form action="RemoveProductController" method="Post">
    <td>
-    <input type="hidden" value="<%=cc.getCartid()%>" name="cid" />
+    <input type="hidden" value="<%=cc.getCartid()%>" name="cid" id="cid<%=a2%>" />
+	<input type="hidden" value="<%=cc.getPrice()%>" name="price" id="price<%=a2%>" />
 	<center><h4>Product Id :<%=cc.getPid()%></h4></center>
     <center><h4>Product Name :<a href="ShowProductDetail.jsp?pid=<%=cc.getPid()%>"><%=cc.getPname()%></a></h4></center>
     <center><b>Price</b>     : <%=cc.getPrice()%> Rs.<br/></center>
     <center><img src="images/<%=cc.getImage()%>" heigth="150" width="150" /></center>
     <center><b>Weight</b>    : <%=cc.getWeight()%> gms.<br/></center>
     <center><b>Details</b>   : <%=cc.getDetails()%><br/></center>
-    <center><b>Quantity</b>   : <%=cc.getQuantity()%><br/></center>
+    <center><b>Quantity</b>  :<input type="number" id="quant<%=a2%>" min="1" name="quantity" value="<%=cc.getQuantity()%>" required="required"  onchange="getData(<%=a2%>);"/>   : <br/></center>
     <center><h4><input type="submit" value="Remove From Cart" /></h4></center>   
-    <input type="hidden" value="<%=cc.getPid()%>" name="pid" />
+    <input type="hidden" value="<%=cc.getPid()%>" name="pid" id="pid<%=a2%>"  />
     <%tamount=tamount+Double.parseDouble(cc.getTamount()); %>
    </td> 				
 		</form>
@@ -76,16 +135,17 @@ if(ar1!=null)
 
  <form action="RemoveProductController" method="Post">
    <td>
-   <input type="hidden" value="<%=cc.getCartid()%>" name="cid" />
+   <input type="hidden" value="<%=cc.getCartid()%>" name="cid" id="cid<%=a2%>" />
+	<input type="hidden" value="<%=cc.getPrice()%>" name="price" id="price<%=a2%>" />
     <center><h4>Product Id :<%=cc.getPid()%></h4></center>
     <center><h4>Product Name :<a href="ShowProductDetail.jsp?pid=<%=cc.getPid()%>"><%=cc.getPname()%></a></h4></center>
     <center><b>Price</b>     : <%=cc.getPrice()%> Rs.<br/></center>
     <center><img src="images/<%=cc.getImage()%>" heigth="150" width="150" /></center>
     <center><b>Weight</b>    : <%=cc.getWeight()%> gms.<br/></center>
     <center><b>Details</b>   : <%=cc.getDetails()%><br/></center>
-    <center><b>Quantity</b>   : <%=cc.getQuantity()%><br/></center>
+    <center><b>Quantity</b>  :<input type="number" id="quant<%=a2%>" min="1" name="quantity" value="<%=cc.getQuantity()%>" required="required" onchange="getData(<%=a2%>);" />   : <br/></center>
     <center><h4><input type="submit" value="Remove From Cart" /></h4></center>   
-    <input type="hidden" value="<%=cc.getPid()%>" name="pid" />
+    <input type="hidden" value="<%=cc.getPid()%>" name="pid" id="pid<%=a2%>" />
      <%tamount=tamount+Double.parseDouble(cc.getTamount()); %>
     </td>
 </form>
@@ -119,11 +179,14 @@ else
     	
 }
 %>
+<style>
+#res{font-size:24px;}
+</style>
  <%if(a!=0)
     	 { %><table border="2" bgcolor=white>
      <form action="OrderPlaceController" method="get" />
  <tr><td><h1><font color=blue>Total product</font></h1></td><td><h1><%=a%></h1></td></tr>
-     <tr><td><h1><font color=blue>Total Amount</font></h1></td><td><h1><%=tamount%></h1></td></tr>
+     <tr><td><h1><font color=blue>Total Amount</font></h1></td><td><input type="text" id="res" value="<%=tamount%>" readonly/></td></tr>
     
      <tr><td><input type="submit" value="CheckOut" name="op" /></td></tr>
     <%}%>

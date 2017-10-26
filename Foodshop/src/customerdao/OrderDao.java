@@ -5,7 +5,8 @@ package customerdao;
 	import java.sql.PreparedStatement;
 	import java.sql.ResultSet;
 	import java.sql.SQLException;
-	import java.util.ArrayList;
+import java.sql.Statement;
+import java.util.ArrayList;
 
 import bean.Product;
 import customerbean.Customer;
@@ -27,23 +28,32 @@ public class OrderDao {
 			    ps.setString(1,ipadd);
 							//execute statement
 			    ResultSet rs= ps.executeQuery();//return the data and set it to the result set reference
-			     
+			    Statement st=con.createStatement();
+				
+			    ResultSet rss=st.executeQuery("select max(oid) from order1");
+				int oid=1;
+				if(rss.next())
+				 oid=rss.getInt(1)+1;
 			while(rs.next())//if data there condition true
 			{   
+					
+				
 				//prepare the statement
 				//create sql query
-			    PreparedStatement ps1=con.prepareStatement("insert into order1 (pid,pname,details,price,image,quantity,tamount,email,pin,pmode) values(?,?,?,?,?,?,?,?,?,?)");//placeholder
+			    PreparedStatement ps1=con.prepareStatement("insert into order1 (oid,pid,pname,details,price,image,quantity,tamount,email,pin,pmode) values(?,?,?,?,?,?,?,?,?,?,?)");//placeholder
 			  //set the placeholder value
-				ps1.setInt(1,rs.getInt("pid"));
-				ps1.setString(2,rs.getString("pname"));
-				ps1.setString(3,rs.getString("details"));
-				ps1.setString(4,rs.getString("price"));
-				ps1.setString(5,rs.getString("image"));
-				ps1.setInt(6,rs.getInt("quantity"));
-				ps1.setString(7,rs.getString("tamount"));
-	            ps1.setString(8,email);	
-	            ps1.setString(9,pin);
-	            ps1.setString(10,pmode);
+			    
+			    ps1.setInt(1,oid);
+				ps1.setInt(2,rs.getInt("pid"));
+				ps1.setString(3,rs.getString("pname"));
+				ps1.setString(4,rs.getString("details"));
+				ps1.setString(5,rs.getString("price"));
+				ps1.setString(6,rs.getString("image"));
+				ps1.setInt(7,rs.getInt("quantity"));
+				ps1.setString(8,rs.getString("tamount"));
+	            ps1.setString(9,email);	
+	            ps1.setString(10,pin);
+	            ps1.setString(11,pmode);
 
 	            
 	            //prepare the statement
@@ -101,7 +111,7 @@ public class OrderDao {
 				//object creation of product class
 				Product e=new Product();
 				//set value to the object product class
-			    e.setOrderid(rs.getInt("orderid"));
+			    e.setOrderid(rs.getInt("oid"));
 				e.setPid(rs.getInt("pid"));
 				e.setPname(rs.getString("pname"));
 				e.setDetails(rs.getString("details"));
@@ -143,7 +153,7 @@ public class OrderDao {
 			//object creation of customer class
 			Product e=new Product();
 		    //set the value to product class object
-			e.setOrderid(rs.getInt("orderid"));
+			e.setOrderid(rs.getInt("oid"));
 		    e.setPid(rs.getInt("pid"));
 			e.setPname(rs.getString("pname"));
 			e.setDetails(rs.getString("details"));
@@ -187,7 +197,7 @@ public class OrderDao {
 			Product e=new Product();
 		    //set the value to the object of product class
 			
-		    e.setOrderid(rs.getInt("orderid"));
+		    e.setOrderid(rs.getInt("oid"));
 		    e.setPid(rs.getInt("pid"));
 			e.setPname(rs.getString("pname"));
 			e.setDetails(rs.getString("details"));
@@ -259,7 +269,7 @@ public class OrderDao {
 		    Product e=new Product();
 		
 		    //set the value to the object of product class
-			e.setOrderid(rs.getInt("orderid"));
+			e.setOrderid(rs.getInt("oid"));
 		    e.setPid(rs.getInt("pid"));
 			e.setPname(rs.getString("pname"));
 			e.setDetails(rs.getString("details"));
@@ -283,5 +293,38 @@ public class OrderDao {
 		//execution go to show order status controller
 		
 	}
-	
+
+	public Product getOid(String email) {
+
+		//execution come from buy product controller
+		Product e=new Product();//object creation of product class
+		try {	
+			//connection establishment
+		    Connection con=new ProductDao().start();
+		    //prepare the statement
+		    //create the sql query
+		    PreparedStatement ps=con.prepareStatement("select max(oid) from order1 where email=?");
+			//set placeholder value
+		    ps.setString(1,email);
+		    //execute statement
+		    ResultSet rs= ps.executeQuery();//return the value with result set reference
+		if(rs.next())//condition check
+		{
+			//set the value in product class object
+			e.setOrderid(rs.getInt("oid"));
+			
+		}
+		System.out.println(e);
+			con.close();//connection close
+			  }catch(SQLException  ex)//exception handling
+			{
+				System.err.println(ex);//print exception detail
+			}
+		
+		return e;//return the product class object
+		//execution go  to buyproduct controller
+		
+	}
+
+
 }

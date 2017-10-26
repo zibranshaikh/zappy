@@ -2,7 +2,15 @@ package customercontroller;
 import customerdao.OrderDao;
 import java.io.IOException;
 import java.net.InetAddress;
+import java.util.Properties;
 
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.PasswordAuthentication;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -10,6 +18,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
+import bean.Product;
 
 
 /**
@@ -62,10 +72,20 @@ public class BuyProductController extends HttpServlet {
 		     String pmode=request.getParameter("pmode");
 	//calling the method for buy the product which insert into order table
 		     int p=od.buyProduct(email,ipadd,pin,pmode);//return the integer value
-	 	     System.out.println("p in buy="+p);
+	 	      
+		     System.out.println("p in buy="+p);
 	 	     if(p!=0)//if order table inserted condition true
-	 	     {
-	 	    	 //forward the execution to the customer jsp page with successful message
+	 	     {   
+	 	    	 
+	 	    	   Product pd= new Product(); 
+		    	   pd=od.getOid(email);
+		    	   int orderid=pd.getOrderid();
+	 	    	String subject="Zappy Foods Order Placed";
+	 	        String message="Your Order has been placed with orderid "+orderid;
+	 	    	CustController cc=new CustController();
+	 	    	          cc.sendMail(email,message,subject);
+			     
+	 	   //forward the execution to the customer jsp page with successful message
 		  RequestDispatcher rd=request.getRequestDispatcher("Customer.jsp");
 	 	  request.setAttribute("msg", "order successfully placed");
 	 	  rd.forward(request, response);

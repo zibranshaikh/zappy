@@ -357,10 +357,21 @@ public class ProductDao {
 			   Connection con=new ProductDao().start();
 			   //prepare statement
 			   //create sql statement 
-			   	  PreparedStatement ps=con.prepareStatement("update order1 set status=? where orderid=?");//placeholder
+			   PreparedStatement ps1=con.prepareStatement("select email from order1 where oid=?");
+			   ps1.setInt(1,oid);
+			   ResultSet rs=ps1.executeQuery();
+			   String email=null;
+			   if(rs.next())
+			   {
+				   email=rs.getString("email");
+			   }
+				   
+			   	  PreparedStatement ps=con.prepareStatement("update order1 set status=? where oid=? and email=?");//placeholder
 			   	  //set the placeholder value  
 			   	  ps.setInt(1,status);
-			   	    ps.setInt(2,oid);
+			   	  ps.setInt(2,oid);
+			   	  ps.setString(3,email);
+			   	  
 			   	    //execute statement
 				    y=ps.executeUpdate();//return the integer value no. of rows affected
 				   	   
@@ -380,12 +391,21 @@ public class ProductDao {
 			   //connection establishment
 			   Connection con=new ProductDao().start();
 			   //prepare the statement
-			   //create the sql query
-			   	  PreparedStatement ps=con.prepareStatement("update order1 set status=? where orderid=?");//placeholder
+               //create the sql query
+			   PreparedStatement ps1=con.prepareStatement("select email from order1 where oid=?");
+			   ps1.setInt(1,oid);
+			   ResultSet rs=ps1.executeQuery();
+			   String email=null;
+			   if(rs.next())
+			   {
+				   email=rs.getString("email");
+			   }
+	  PreparedStatement ps=con.prepareStatement("update order1 set status=? where oid=? and email=?");//placeholder
 			   	  //set the placeholder value  
 			   	  ps.setInt(1,status);
-			   	    ps.setInt(2,oid);
-			   	    //execute statement
+			   	   ps.setInt(2,oid);
+			   	   ps.setString(3,email); 
+			   	   //execute statement
 				    y=ps.executeUpdate();//return the no. of rows affected 
 				   	   
 		         }catch(Exception e)//exception handling
@@ -552,12 +572,12 @@ public class ProductDao {
 		    Connection con=new ProductDao().start();
 		    //prepare the statement
 		    //create the sql query
-		    PreparedStatement ps=con.prepareStatement("select * from order1 where oid=?");
+		    PreparedStatement ps=con.prepareStatement("select email from order1 where oid=?");
 			//set placeholder value
 		    ps.setInt(1,oid);
 		    //execute statement
 		    ResultSet rs= ps.executeQuery();//return the value with result set reference
-		while(rs.next())//condition check
+		if(rs.next())//condition check
 		{
 			//set the value in product class object
 			e.setEmail(rs.getString("email"));

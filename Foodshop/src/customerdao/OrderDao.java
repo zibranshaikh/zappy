@@ -311,7 +311,7 @@ public class OrderDao {
 		if(rs.next())//condition check
 		{
 			//set the value in product class object
-			e.setOrderid(rs.getInt("oid"));
+			e.setOrderid(rs.getInt(1));
 			
 		}
 		System.out.println(e);

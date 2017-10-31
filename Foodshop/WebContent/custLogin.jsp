@@ -41,6 +41,7 @@ if(m2!=null)
  
  <h1><a href="createCustomer.jsp">Create new Account</a></h1>
  </form>
+ <h1><a href="forgotPass.jsp">Forgot Password?</a></h1>
  	<%
   response.addHeader("pragma", "no-cache");
   response.addHeader("cache-control", "no-store");

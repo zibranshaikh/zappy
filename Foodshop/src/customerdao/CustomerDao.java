@@ -217,5 +217,29 @@ public class CustomerDao {
 		//execution go to adeditpcontroller
 }
 
-	
+	public Customer getPass(String email) {
+
+      Customer c=new Customer();
+		try {
+			//connection establishment
+			Connection con=new ProductDao().start();//return the connection reference
+			//prepare the statement 
+			//create the sql query
+			PreparedStatement ps1=con.prepareStatement("select password from customer where email=?");//placeholder
+	   	    ps1.setString(1,email);//set the placeholder value
+	   	    //create resultset reference
+	   	    //execute statement
+	   	    ResultSet rs= ps1.executeQuery();//return the data to result set reference
+			while(rs.next())//condition check
+			{
+				//get the data by result set reference
+			  c.setPassword(rs.getString("password"));	
+			}
+	}catch(Exception e)//exception handling
+	     {
+	   	  System.out.println(e);//print exception in detail
+	     }
+
+  return c;	
+}
 }

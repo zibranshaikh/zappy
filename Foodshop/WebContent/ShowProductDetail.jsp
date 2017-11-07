@@ -50,7 +50,7 @@
 <p><h1 style="background-color:white">Product Detail</h1></p>
  
     <table> 
-        <tr><td>              <img src="images/<%=p.getImage()%>" heigth="300" width="300" /></td></tr>
+        <tr><td>              <img src="images/<%=p.getImage()%>" heigth="100" width="100" /></td></tr>
                            <tr><td><h3>Image</h1></td></tr>
         <tr><td><h3>Product Name  </h3></td><td><h3><%=p.getPname()%></h3></td></tr> 
         <tr><td><h3>price         </h3></td><td><h3><%=p.getPrice()%></h3></td></tr>

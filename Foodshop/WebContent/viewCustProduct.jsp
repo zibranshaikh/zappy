@@ -43,31 +43,20 @@ header {
 %>
 
 <header>
-<font color=black>
- <p1 align="left" >
-<form action="AdminLogin.jsp" method="get">
-<input type="submit" value="AdminLogin" /></form><!-- button for go to the admin login -->
-</p1>
+<font size="5" color=black align="left">
+<p align="left">
 <% if(user==null)
    {%>
-<p2 align="center" >
-<form action="custLogin.jsp" method="get">
-<input type="submit" value="CustomerLogin" /></form></p2><!-- if no user logged in then customer login button is appear -->
+   <a href="AdminLogin.jsp">AdminLogin</a>
+   <a href="custLogin.jsp">CustomerLogin</a>
 <%} %>
-<p3 align="right">
-<form action="ShowCartController" method="get">
-<%System.out.println("a inside show cart button "+a); %>
-<input type="submit" value="ShowCart(<%=a%>)" /></form></p3><!-- button for go to cart -->
-
    <% if(user!=null)
    {%>
-<p1 align="left">
-<form action="Customer.jsp" method="" >
-<input type="submit" value="Home" /></form></p1><!-- user logged in then home button for customer home -->
-<p1 align="right">
-<form action="logout.jsp" method="">
-<input type="submit" value="LogOut" /></form></p1><!-- logout button if user logged in -->
+<a href="Customer.jsp">Home</a>
+<a href="logout.jsp">LogOut</a>
 <%} %>
+<a href="ShowCartController">ShowCart(<%=a%>)</a>
+</p>
 </font>
 </header>
 <pre>
@@ -85,15 +74,12 @@ if(m1!=null)
 </font>
 <h1 style="background-color:white">Welcome To Zappy Foodshop</h1>
 <h1 style="background-color:white">Our Products</h1>
-
-<!-- import the package -->
 <%@page import="java.util.ArrayList,bean.Product" %>
 <%
-
 ArrayList<Product> ar=(ArrayList<Product>)request.getAttribute("LIST");//get the list 
 if(ar!=null)
 {	int a1=0;
-	%><table border="1" width=80%><%
+	%><table border="1" width=70%><%
 			for(Product cc:ar)//one bye one fetch data by object 
 			{
 				
@@ -103,12 +89,10 @@ if(ar!=null)
 		    %>
 			<form action="AddToCartController" method="post">
 <td>
-<!-- all the data are fetch by the product class object and calling the getter method and visible to the webpage -->
-	  <center><h4>Product Id :<%=cc.getPid()%></h4></center>
-	  <!-- by clicking on name of product it will go to detail page of the product -->
+	<center><h4>Product Id :<%=cc.getPid()%></h4></center>
     <center><h4>Product Name :<a href="ShowProductDetail.jsp?pid=<%=cc.getPid()%>"><%=cc.getPname()%></a></h4></center>
-    <center><b>Price</b>     : <%=cc.getPrice()%>Rs.<br/></center>
-    <center><img src="images/<%=cc.getImage()%>" heigth="150" width="150" /></center>
+     <center><b>Price</b>     : <%=cc.getPrice()%>Rs.<br/></center>
+    <center><img src="images/<%=cc.getImage()%>" heigth="100" width="100" /></center>
     <center><b>Weight</b>    : <%=cc.getWeight()%>kg.<br/></center>
     <center><b>Details</b>   : <%=cc.getDetails()%><br/></center>
     <center><input type="number" min="1" value="1" name="quantity" required/></center>
@@ -123,11 +107,10 @@ if(ar!=null)
 
 					<form action="AddToCartController" method="post">									</br>
 <td>
-<!-- it is a next line of product -->
     <center><h4>Product Id :<%=cc.getPid()%></h4></center>
     <center><h4>Product Name :<a href="ShowProductDetail.jsp?pid=<%=cc.getPid()%>"><%=cc.getPname()%></a></h4></center>
     <center><b>Price</b>     : <%=cc.getPrice()%> Rs.<br/></center>
-    <center><img src="images/<%=cc.getImage()%>" heigth="150" width="150" /></center>
+    <center><img src="images/<%=cc.getImage()%>" heigth="100" width="100" /></center>
     <center><b>Weight</b>    : <%=cc.getWeight()%> kg.<br/></center>
     <center><b>Details</b>   : <%=cc.getDetails()%><br/></center>
     <center><input type="number" min="1" value="1" name="quantity" required/></center>

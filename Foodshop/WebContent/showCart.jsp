@@ -17,8 +17,14 @@ function getData(i)
 	var pid=document.getElementById('pid'+i).value; 
 	var up=document.getElementById('price'+i).value; 
 	 var data= "cid="+cid+"&pid="+pid+"&quantity="+q+"&price="+up;
-	//	alert(data);		
-		var url="updateCartQ.jsp?"+data;
+	//	alert(data);
+	if(q==0)
+		{
+			alert("Quantity Should not be zero");
+		}
+	if(q!=0)
+		{
+	var url="updateCartQ.jsp?"+data;
 		var request;
 		if(window.XMLHttpRequest)
 		{  
@@ -51,7 +57,7 @@ function getData(i)
 			}		
 		
 		}
-		
+		}
 	}
 	
 
@@ -113,8 +119,7 @@ if(ar1!=null)
 			{
 			out.println("<tr>");
 		    %>
-			 <form action="RemoveProductController" method="Post">
-   <td>
+	 <td>
     <input type="hidden" value="<%=cc.getCartid()%>" name="cid" id="cid<%=a2%>" />
 	<input type="hidden" value="<%=cc.getPrice()%>" name="price" id="price<%=a2%>" />
 	<center><h4>Product Id :<%=cc.getPid()%></h4></center>
@@ -123,8 +128,9 @@ if(ar1!=null)
     <center><img src="images/<%=cc.getImage()%>" heigth="150" width="150" /></center>
     <center><b>Weight</b>    : <%=cc.getWeight()%> gms.<br/></center>
     <center><b>Details</b>   : <%=cc.getDetails()%><br/></center>
-    <center><b>Quantity</b>  :<input type="number" id="quant<%=a2%>" min="1" name="quantity" value="<%=cc.getQuantity()%>" required="required"  onchange="getData(<%=a2%>);"/>   : <br/></center>
-    <center><h4><input type="submit" value="Remove From Cart" /></h4></center>   
+    <center><b>Quantity</b>  :<input type="number" id="quant<%=a2%>" min="1" name="quantity" value="<%=cc.getQuantity()%>" required="required"  onchange="getData(<%=a2%>);"/><br/></center>
+    <form action="RemoveProductController" method="Post">
+  <center><h4><input type="submit" value="Remove From Cart" /></h4></center>   
     <input type="hidden" value="<%=cc.getPid()%>" name="pid" id="pid<%=a2%>"  />
     <%tamount=tamount+Double.parseDouble(cc.getTamount()); %>
    </td> 				
@@ -133,7 +139,6 @@ if(ar1!=null)
 			}else{
 				%>
 
- <form action="RemoveProductController" method="Post">
    <td>
    <input type="hidden" value="<%=cc.getCartid()%>" name="cid" id="cid<%=a2%>" />
 	<input type="hidden" value="<%=cc.getPrice()%>" name="price" id="price<%=a2%>" />
@@ -143,7 +148,8 @@ if(ar1!=null)
     <center><img src="images/<%=cc.getImage()%>" heigth="150" width="150" /></center>
     <center><b>Weight</b>    : <%=cc.getWeight()%> gms.<br/></center>
     <center><b>Details</b>   : <%=cc.getDetails()%><br/></center>
-    <center><b>Quantity</b>  :<input type="number" id="quant<%=a2%>" min="1" name="quantity" value="<%=cc.getQuantity()%>" required="required" onchange="getData(<%=a2%>);" />   : <br/></center>
+    <center><b>Quantity</b>  :<input type="number" id="quant<%=a2%>" min="1" name="quantity" value="<%=cc.getQuantity()%>" required="required" onchange="getData(<%=a2%>);" />  <br/></center>
+    <form action="RemoveProductController" method="Post">
     <center><h4><input type="submit" value="Remove From Cart" /></h4></center>   
     <input type="hidden" value="<%=cc.getPid()%>" name="pid" id="pid<%=a2%>" />
      <%tamount=tamount+Double.parseDouble(cc.getTamount()); %>

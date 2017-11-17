@@ -152,7 +152,6 @@ public class UpdateImageController extends HttpServlet {
   	       ProductDao pd=new ProductDao();//object creation of product dao class
   	       //by this object calling the method for update the image
   	       y=pd.updateImage(pid1,filename);//return the integer value
-  	       System.out.println("y in update image "+y);
   	     if(y!=0)//if image update condition true
   		    {	
   	    	 //forward the execution to the view product controller with the data

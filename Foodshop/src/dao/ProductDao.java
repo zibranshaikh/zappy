@@ -474,8 +474,7 @@ public class ProductDao {
 			     {
 			   	  System.out.println(e);//print exception detail
 			     }
-       System.out.println("y in update image dao "+y);
-		   return y;//return integer value
+    	   return y;//return integer value
 		   
 		   //execution go to update image controller
 	

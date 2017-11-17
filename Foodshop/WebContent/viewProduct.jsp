@@ -94,8 +94,9 @@ if(ar1!=null)
 		 <form action="UpdateImageController" method="post" enctype="multipart/form-data">
  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
  <div class="form-group">
-                           <input type="file" title="search image" id="file" name="file" onchange="show(this)" required="required"/></div></div></h1></div></center>                       
-                          <input type="hidden" value="<%=cc.getPid()%>" name="pid"  />
+ <center><h3>Update Image</h3></center>
+                          <center> <input type="file" title="search image" id="file" name="file" onchange="show(this)" required="required"/></div></div></h1></div></center>                       
+                         <center> <input type="hidden" value="<%=cc.getPid()%>" name="pid"  /></center>
                           <center><input type="submit" value="updateimage" /></center>  
 </td>		
 	<%
@@ -120,8 +121,9 @@ if(ar1!=null)
 <form action="UpdateImageController" method="post" enctype="multipart/form-data">
  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
  <div class="form-group">
-    <input type="file" title="search image" id="file" name="file" onchange="show(this)" required="required"/></div></div></h1></div></center>                       
-                          <input type="hidden" value="<%=cc.getPid()%>" name="pid"  />
+ <center><h3>Update Image</h3></center>
+  <center><input type="file" title="search image" id="file" name="file" onchange="show(this)" required="required"/></div></div></h1></div></center>                       
+                          <center><input type="hidden" value="<%=cc.getPid()%>" name="pid" /></center>
                           <center><input type="submit" value="updateimage" /></center>  
 </form>
 	</td>			<%

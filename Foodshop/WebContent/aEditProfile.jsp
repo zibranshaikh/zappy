@@ -15,7 +15,7 @@
 </script>
 
 
-<body bgcolor=#4db8ff >
+<body bgcolor=#e0e0eb>
 <p1 align="left">
 <form action="Admin.jsp" method="">
 

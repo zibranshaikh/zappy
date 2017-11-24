@@ -7,7 +7,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Customer Home</title>
 </head>
-<body bgcolor=#4db8ff >
+<body bgcolor=#e0e0eb>
 <%!int a=0;%>
  <%!String ipadd="";%>
 <%@page import="dao.ProductDao"%>

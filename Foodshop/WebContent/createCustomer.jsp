@@ -38,7 +38,7 @@ $(document).ready(function() {
 
 <title>Customer Registration</title>
 
-<body bgcolor=#4db8ff >
+<body bgcolor=#e0e0eb>
 <p align="left">
 <h1><a href="ViewCustProductController">GoToMainPage</a></h1>
 </p>

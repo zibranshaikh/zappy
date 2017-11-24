@@ -3,7 +3,7 @@
 <link rel="shortcut icon" type="image/x-icon" href="images/zappy-logo.ico" />
 <title>Admin Login</title>
 
-<body  bgcolor=#4db8ff>
+<body  bgcolor=#e0e0eb>
 
 <p align="left">
 <form action="ViewCustProductController" method="">

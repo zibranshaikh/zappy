@@ -6,6 +6,69 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Products</title>
+<style type="text/css">
+table { 
+  width: 100%; 
+  border-collapse: collapse; 
+}
+/* Zebra striping */
+tr:nth-of-type(odd) { 
+  background: #eee; 
+}
+/* Zebra striping */
+tr:nth-of-type(even) { 
+  background: #eee; 
+}
+th { 
+  background: #333; 
+  color: white; 
+  font-weight: bold; 
+}
+td, th { 
+  padding: 6px; 
+  border: 1px solid #ccc; 
+  text-align: left; 
+}
+@media 
+only screen and (max-width: 760px),
+(min-device-width: 768px) and (max-device-width: 1024px)  {
+
+	/* Force table to not be like tables anymore */
+	table, thead, tbody, th, td, tr { 
+		display: block; 
+	}
+	
+	/* Hide table headers (but not display: none;, for accessibility) */
+	thead tr { 
+		position: absolute;
+		top: -9999px;
+		left: -9999px;
+	}
+	
+	tr { border: 1px solid #ccc; }
+	
+	td { 
+		/* Behave  like a "row" */
+		border: none;
+		border-bottom: 1px solid #eee; 
+		position: relative;
+		padding-left: 50%; 
+	}
+	
+	td:before { 
+		/* Now like a table header */
+		position: absolute;
+		/* Top/left values mimic padding */
+		top: 6px;
+		left: 6px;
+		width: 45%; 
+		padding-right: 10px; 
+		white-space: nowrap;
+	}
+	
+
+}
+</style>
 <script type="text/javascript">
 function show(input) {
         debugger;
@@ -32,16 +95,13 @@ function show(input) {
 
 </script>
 </head>
-<body bgcolor="#4db8ff" >
-<p1 align="right">
-<form action="adminlogout.jsp" method="">
-
-<input type="submit" value="LogOut" /></form></p1><!-- button for logout admin -->
-
+<body bgcolor="#e0e0eb" >
 <p1 align="left">
-<form action="Admin.jsp" method="">
-<input type="submit" value="Home" /></form><!-- button for go to admin home  -->
+<a href="Admin.jsp">Home</a>
 </p1>
+<p1 align="right">
+<a href="adminlogout.jsp">LogOut</a>
+</p1><!-- button for logout admin -->
 <script>
 function confirmTest()
 {

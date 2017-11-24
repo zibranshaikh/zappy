@@ -7,7 +7,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Insert title here</title>
 </head>
-<body bgcolor="#4db8ff">
+<body bgcolor="#e0e0eb">
 <%  String user=(String)session.getAttribute("user");%>
 
 <%!int a=0;%>
@@ -29,14 +29,19 @@
    }
 %>
 <p1 align="left" >
-<form action="AdminLogin.jsp" method="get">
-<input type="submit" value="AdminLogin" /></form></p1>
+   <a href="AdminLogin.jsp">AdminLogin</a>
+</form></p1>
 <p2 align="center" >
-<form action="custLogin.jsp" method="get">
-<input type="submit" value="CustomerLogin" /></form></p1>
+   <a href="custLogin.jsp">CustomerLogin</a>
+</p2>
+<p1 align="center">
+<a href="ViewCustProductController">SHOP NOW</a>
+</p1>
+
 <p3 align="right">
-<form action="ShowCartController" method="get">
-<input type="submit" value="ShowCart(<%=a%>)" /></form></p1>
+   <a href="ShowCartController">ShowCart(<%=a%>)</a>
+</p3>
+
 <center><img src="images/zappy-logo.png"></img>
 </center>
 <%@page import="dao.ProductDao,bean.Product"%>

@@ -25,7 +25,7 @@ function show(input) {
 </script>
  <link rel="shortcut icon" type="image/x-icon" href="images/zappy-logo.ico" />
 <title>Upload Product</title>
-<body bgcolor=#4db8ff >
+<body bgcolor=#e0e0eb >
 
 <p1 align="left">
 <form action="Admin.jsp" method="">

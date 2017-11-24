@@ -7,7 +7,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Customer Login</title>
 </head>
-<body bgcolor=#4db8ff >
+<body bgcolor=#e0e0eb>
 <p align="left">
 <form action="ViewCustProductController" mehtod="">
 <input type="submit" value="GoToMainPage" >

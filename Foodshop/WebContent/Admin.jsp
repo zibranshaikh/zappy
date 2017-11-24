@@ -1,6 +1,6 @@
  <link rel="shortcut icon" type="image/x-icon" href="images/zappy-logo.ico" />
 <title>Admin Home</title>
-<body bgcolor=#4db8ff>
+<body bgcolor=#e0e0eb>
 <p1 align="right">
 <form action="adminlogout.jsp" method="">
 

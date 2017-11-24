@@ -7,7 +7,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Order Placement</title>
 </head>
-<body bgcolor="#4db8ff" >
+<body bgcolor="#e0e0eb" >
 <p1 align="left">
 <form action="Customer.jsp" method="" >
 <input type="submit" value="Home" /></form></p1>

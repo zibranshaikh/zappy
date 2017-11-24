@@ -32,7 +32,7 @@ function show(input) {
 </script>
 <title>Insert title here</title>
 </head>
-<body bgcolor=#4db8ff >
+<body bgcolor=#e0e0eb >
 <form action="Admin.jsp" method="">
 <input type="submit" value="Home" /></form>
 </p1>

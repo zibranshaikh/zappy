@@ -6,7 +6,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Forgot Password</title>
 </head>
-<body bgcolor=#4db8ff>
+<body bgcolor=#e0e0eb>
 <center>
 <img src="images/zappy-logo.png"></img>
 <pre>

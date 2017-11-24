@@ -63,30 +63,29 @@ function getData(i)
 
 	</script>
 </head>
-<body bgcolor="#4db8ff" >
+<body bgcolor="#e0e0eb" >
 
 <%  String user=(String)session.getAttribute("user");
     if(user!=null)
    {%>
 <p1 align="left">
-<form action="Customer.jsp" method="" >
-<input type="submit" value="Home" /></form></p1>
+<a href="Customer.jsp">Home</a>
+</p1>
 <p1 align="right">
-<form action="logout.jsp" method="">
-<input type="submit" value="LogOut" /></form></p1>
+<a href="logout.jsp">LogOut</a>
+</p1>
 
 <%}
     else
     {
     %>
     <p2 align="left" >
-<form action="custLogin.jsp" method="get">
-<input type="submit" value="CustomerLogin" /></form></p2>
+<a href="custLogin.jsp">CustomerLogin</a>
+</p2>
     <%} %>
 <p1 align="center">
-<form action="ViewCustProductController" method="get">
-
-<input type="submit" value="SHOP NOW" /></form></p1>
+<a href="ViewCustProductController">SHOP NOW</a>
+</p1>
 <pre>
 <center>
 <img src="images/zappy-logo.png"></img>
@@ -194,7 +193,7 @@ else
  <tr><td><h1><font color=blue>Total product</font></h1></td><td><h1><%=a%></h1></td></tr>
      <tr><td><h1><font color=blue>Total Amount</font></h1></td><td><input type="text" id="res" value="<%=tamount%>" readonly/></td></tr>
     
-     <tr><td><input type="submit" value="CheckOut" name="op" /></td></tr>
+     <tr><td></td><td><input type="submit" value="CheckOut" name="op" /></td></tr>
     <%}%>
     </form>   
     </table>

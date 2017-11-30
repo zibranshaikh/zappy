@@ -43,6 +43,7 @@ public class RemoveProductController extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	    //get the field by name
 		String cid=request.getParameter("cid");
+		System.out.println("cid in remove product controller = "+cid);
 	    //it may contain some spaces so we trimmed it        
 		cid=cid.trim();
 		//convert it into integer

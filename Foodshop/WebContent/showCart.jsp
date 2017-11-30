@@ -24,6 +24,7 @@ function getData(i)
 		}
 	if(q!=0)
 		{
+		//alert("data going "+data)
 	var url="updateCartQ.jsp?"+data;
 		var request;
 		if(window.XMLHttpRequest)
@@ -47,7 +48,7 @@ function getData(i)
 		function getInfo(){  
 			if(request.readyState==4){
 			var val=request.responseText;  
-	//		alert("Now Total amount is"+val);
+			//alert("Now Total amount is"+val);
 			document.getElementById('res').value=val;
 			/* var strarray = val.split('.');
 			document.getElementById('pdate').value=(strarray[0]).trim();  
@@ -120,6 +121,7 @@ if(ar1!=null)
 		    %>
 	 <td>
     <input type="hidden" value="<%=cc.getCartid()%>" name="cid" id="cid<%=a2%>" />
+    <%System.out.println("cart id in show cart = "+cc.getCartid()); %>
 	<input type="hidden" value="<%=cc.getPrice()%>" name="price" id="price<%=a2%>" />
 	<center><h4>Product Id :<%=cc.getPid()%></h4></center>
     <center><h4>Product Name :<a href="ShowProductDetail.jsp?pid=<%=cc.getPid()%>"><%=cc.getPname()%></a></h4></center>
@@ -129,7 +131,8 @@ if(ar1!=null)
     <center><b>Details</b>   : <%=cc.getDetails()%><br/></center>
     <center><b>Quantity</b>  :<input type="number" id="quant<%=a2%>" min="1" name="quantity" value="<%=cc.getQuantity()%>" required="required"  onchange="getData(<%=a2%>);"/><br/></center>
     <form action="RemoveProductController" method="Post">
-  <center><h4><input type="submit" value="Remove From Cart" /></h4></center>   
+  <input type="hidden" value="<%=cc.getCartid()%>" name="cid" id="cid<%=a2%>" />
+    <center><h4><input type="submit" value="Remove From Cart" /></h4></center>   
     <input type="hidden" value="<%=cc.getPid()%>" name="pid" id="pid<%=a2%>"  />
     <%tamount=tamount+Double.parseDouble(cc.getTamount()); %>
    </td> 				
@@ -139,8 +142,7 @@ if(ar1!=null)
 				%>
 
    <td>
-   <input type="hidden" value="<%=cc.getCartid()%>" name="cid" id="cid<%=a2%>" />
-	<input type="hidden" value="<%=cc.getPrice()%>" name="price" id="price<%=a2%>" />
+   <input type="hidden" value="<%=cc.getPrice()%>" name="price" id="price<%=a2%>" />
     <center><h4>Product Id :<%=cc.getPid()%></h4></center>
     <center><h4>Product Name :<a href="ShowProductDetail.jsp?pid=<%=cc.getPid()%>"><%=cc.getPname()%></a></h4></center>
     <center><b>Price</b>     : <%=cc.getPrice()%> Rs.<br/></center>
@@ -149,7 +151,8 @@ if(ar1!=null)
     <center><b>Details</b>   : <%=cc.getDetails()%><br/></center>
     <center><b>Quantity</b>  :<input type="number" id="quant<%=a2%>" min="1" name="quantity" value="<%=cc.getQuantity()%>" required="required" onchange="getData(<%=a2%>);" />  <br/></center>
     <form action="RemoveProductController" method="Post">
-    <center><h4><input type="submit" value="Remove From Cart" /></h4></center>   
+   <input type="hidden" value="<%=cc.getCartid()%>" name="cid" id="cid<%=a2%>" />
+	 <center><h4><input type="submit" value="Remove From Cart" /></h4></center>   
     <input type="hidden" value="<%=cc.getPid()%>" name="pid" id="pid<%=a2%>" />
      <%tamount=tamount+Double.parseDouble(cc.getTamount()); %>
     </td>

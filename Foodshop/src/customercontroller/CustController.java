@@ -50,7 +50,7 @@ public class CustController extends HttpServlet {
 	//execution come from create customer jsp page
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	//get the fields from create customer jsp page by name
-		String name=request.getParameter("name");
+	String name=request.getParameter("name");
 	String address=request.getParameter("address");
 	String email=request.getParameter("email");
 	String mobile=request.getParameter("mobile");
